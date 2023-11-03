@@ -1,3 +1,8 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 main{
     position: fixed;
     width: 100%;
@@ -8,3 +13,19 @@ main{
     z-index: 1;
     
    }
+
+.container {
+    padding-block: 600;
+
+}
+
+#map-canvas {
+    height: 100%;
+    width: auto;
+    margin: auto 500px auto 500px;
+
+}
+
+.padding-block-600 {
+    padding-block: var(--size-600); 
+}

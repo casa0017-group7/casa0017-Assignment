@@ -42,7 +42,8 @@ function loadPolygon () {
   map.data.loadGeoJson(regioninuk);
   
   map.data.setStyle({
-    strokeWeight: 1, 
+    strokeWeight: 0.5,
+    strokeColor:  "#ffffff"
 
     });
 };
@@ -75,14 +76,14 @@ function loadPolygon () {
 function hoverIn(e) {
   // set the hover state
   e.feature.setProperty("state", "hover");
-
+  console.log(e.feature.getProperty("state"));
 
   // update the styling of the feature 
   map.data.revertStyle();
   map.data.overrideStyle(e.feature, {
     strokeColor: "#ffffff", // white border
     strokeWeight: 2,
-    zIndex: 1,
+    zIndex: 2,
   });
 
 }
@@ -90,11 +91,8 @@ function hoverIn(e) {
 function hoverOut(e) {
   //reset the hover state
   e.feature.setProperty("state", "normal");
-  map.data.overrideStyle(e.feature, {
-  strokeColor: "#000000",
-  strokeWeight: 1,
-  zIndex: 1,
-  });
+  map.data.revertStyle();
+
 }
 
 

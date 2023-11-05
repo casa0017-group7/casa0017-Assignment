@@ -23,8 +23,8 @@ main{
 
 #map-canvas {
     height: 100%;
-    width: auto;
-    margin: auto 600px auto 600px;
+    width: 50%;
+    margin: auto;
 
 }
 

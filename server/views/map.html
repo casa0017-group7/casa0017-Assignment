@@ -4,12 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Map</title>
+
+  <!--icon-->
+  <link rel="icon" type="image/x-icon" href="http://localhost:3000/images/icon-logo.png">
+
   <!--bootstrap.css-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
   <!--bootstrap.icon.css-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
+  <!--css-->
   <link rel='stylesheet' href='http://localhost:3000/stylesheets/style.css' type='text/css'/>
 
   <!--google charts-->
@@ -18,7 +23,6 @@
   <!-- javascript file -->
   <script type="module" src="http://localhost:3000/javascripts/maps.js"></script>
   <script type="text/javascript" src="http://localhost:3000/javascripts/mapstyle.js"></script>
-
   <script type="text/javascript" src="http://localhost:3000/javascripts/barchart.js"></script>
   <script type="text/javascript" src="http://localhost:3000/javascripts/linechart.js"></script>
 
@@ -58,14 +62,26 @@
 <!--sidebar for charts display-->
   <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style="margin-top: 75px; background-color: rgb(255, 255, 255);z-index: 3; width:600px">
     <div class="offcanvas-header">
-      <h3 class="offcanvas-title" id="offcanvasScrollingLabel">Carbon Intensity Data</h3>
+      <div>
+      <h3 class="offcanvas-title" id="offcanvasScrollingLabel" style="display: inline-block;">Carbon Intensity Data</h3>
+      <div type="button" onclick="window.print()" style="padding: 8px;display: inline-block;"><i class="bi bi-printer" style="width: 20px;"></i></div>
+      </div>
+      
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+     
     </div>
     <div class="offcanvas-body">
-      <h5 class="mb-3">Energy type comparison for selected region</h5>
-      <div class="mb-5" id="barchart_material" style="width: 500px; height: 300px; z-index: 1;"></div>
+      <h5 class="mb-3">Selected Region</h5>
+      <div class="toast show" style="width:80px; box-shadow: none;">
+        <div class="d-flex" style=" justify-content: center;vertical-align: middle; padding-top: 10px; ">
+        <p style="display: inline-block;">London</p>
+        <sppan type="button" class="btn-close"  data-bs-dismiss="toast"></span>
+        </div>
+      </div>
+      <h5 class="my-3">Energy type comparison for selected region</h5>
+      <div class="mb-5" id="barchart_material" style="width: 500px; height: 250px; z-index: 1;"></div>
       <h5 class="mb-3">Carbon intensity history</h5>
-      <div id="curve_chart" style="width: 500px; height: 300px; z-index: 1;"></div>
+      <div id="curve_chart" style="width: 500px; height: 250px; z-index: 1;"></div>
     </div>
     
 

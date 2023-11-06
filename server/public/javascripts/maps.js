@@ -11,7 +11,7 @@ var regioninuk = "./resources/UK.geojson"
 
 async function initMap() {
   // The location of Uluru
-  const position = { lat: 54.6819964, lng: -4.0084773 };
+  const position = { lat: 54.6819964, lng: -8 };
   // Request needed libraries.
   //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");

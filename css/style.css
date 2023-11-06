@@ -22,9 +22,9 @@ main{
 }
 
 #map-canvas {
-    height: 100%;
-    width: auto;
-    margin: auto 600px auto 600px;
+    height: 92%;
+    width: 100%;
+    margin: auto;
 
 }
 

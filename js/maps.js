@@ -92,7 +92,7 @@ function hoverOut(e) {
   e.feature.setProperty("state", "normal");
   map.data.overrideStyle(e.feature, {
   strokeColor: "#000000",
-  strokeWeight: 1,
+  strokeWeight: 0.1,
   zIndex: 1,
   });
 }

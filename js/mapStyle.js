@@ -252,11 +252,13 @@ var carbon =
     {
       featureType: "landscape",
       elementType: "geometry",
-      stylers: [{ visibility: "on" }, { color: "#fcfcfc" }],
+      stylers: [{ visibility: "on" }, { color: "#006076" }],
     },
     {
       featureType: "water",
       elementType: "geometry",
-      stylers: [{ visibility: "on" }, { color: "#bfd4ff" }],
+      stylers: [{ visibility: "on" }, { color: "#212529" }],
     },
   ];
+
+  

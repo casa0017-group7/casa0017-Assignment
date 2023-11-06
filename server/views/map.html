@@ -9,6 +9,7 @@
 
   <!--bootstrap.icon.css-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+<<<<<<< HEAD:server/views/map.html
   <link rel='stylesheet' href='http://localhost:3000/stylesheets/style.css' type='text/css'/>
 
   <!-- javascript file -->
@@ -23,6 +24,29 @@
   <nav class="navbar navbar-expand-lg bg-dark border-bottom border-white border-1 border-opacity-25" style="flex:2">
     <div class="container-fluid mx-3 " >
       <span class="bi bi-list me-5" style="color:#ffffff;font-size: 25px;"></span></span>
+=======
+  <link rel='stylesheet' href='./css/style.css' type='text/css'/>
+    <!--google charts-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <!-- javascript file -->
+  <script type="module" src="./js/maps.js"></script>
+  <script type="text/javascript" src="./js/mapStyle.js"></script>
+  <script type="text/javascript" src="./js/animation.js"></script>
+  <script type="text/javascript" src="./js/barchart.js"></script>
+  <script type="text/javascript" src="./js/linechart.js"></script>
+
+
+</head>
+<body class="bg-dark" >
+ 
+<!--navbar on top-->
+  <nav class="navbar navbar-expand-lg bg-dark border-bottom border-white border-1 border-opacity-25" style="flex:2;z-index: 2;">
+    <div class="container-fluid mx-3 " >
+      <span data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" style="cursor:pointer;">
+      <span class="bi bi-list me-5" style="color:#ffffff;font-size: 25px;"></span>
+      </span>
+>>>>>>> dev:map.html
 
 
       <a href="#" class="navbar-brand text-white">
@@ -45,6 +69,7 @@
     </div>
   </nav>
 
+<<<<<<< HEAD:server/views/map.html
 
 <main class="bg-dark text-light text-center text-lg-start" style="flex:1; padding-top:180px;">
   <aside style="display: flex;">
@@ -143,8 +168,33 @@
 
 
 </main>
+=======
+  
+<!--sidebar for charts display-->
+  <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style="margin-top: 75px; background-color: rgb(255, 255, 255);z-index: 3; width:600px">
+    <div class="offcanvas-header">
+      <h3 class="offcanvas-title" id="offcanvasScrollingLabel">Carbon Intensity Data</h3>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <h5 class="mb-3">Energy type comparison for selected region</h5>
+      <div class="mb-5" id="barchart_material" style="width: 500px; height: 300px; z-index: 1;"></div>
+      <h5 class="mb-3">Carbon intensity history</h5>
+      <div id="curve_chart" style="width: 500px; height: 300px; z-index: 1;"></div>
+    </div>
+    
+
+    
+  </div>
+
+<!--map display-->
+>>>>>>> dev:map.html
 <div id="map-canvas">
 </div>
+
+
+
+
 
   <!--Jquery-->
   <script type='text/javascript' src='https://code.jquery.com/jquery-3.5.1.js'></script>

@@ -22,6 +22,7 @@ async function initMap() {
     zoom: 6.2,
     center: position,
     styles: carbon
+
   });
 
   // Add events for google maps
@@ -41,9 +42,10 @@ function loadPolygon () {
   // Load Geojson files
   map.data.loadGeoJson(regioninuk);
   
+  
   map.data.setStyle({
-    strokeWeight: 1, 
-
+    strokeWeight: 1,
+    
     });
 };
 
@@ -81,8 +83,9 @@ function hoverIn(e) {
   map.data.revertStyle();
   map.data.overrideStyle(e.feature, {
     strokeColor: "#ffffff", // white border
-    strokeWeight: 2,
+    strokeWeight: 1,
     zIndex: 1,
+    
   });
 
 }
@@ -92,7 +95,7 @@ function hoverOut(e) {
   e.feature.setProperty("state", "normal");
   map.data.overrideStyle(e.feature, {
   strokeColor: "#000000",
-  strokeWeight: 0.1,
+  strokeWeight: 1,
   zIndex: 1,
   });
 }

@@ -257,7 +257,7 @@ var carbon =
     {
       featureType: "water",
       elementType: "geometry",
-      stylers: [{ visibility: "on" }, { color: "#212529" }],
+      stylers: [{ visibility: "on" }, { color: "#D3D3D3" }],
     },
   ];
 

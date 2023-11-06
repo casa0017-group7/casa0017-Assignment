@@ -54,7 +54,39 @@ function loadPolygon () {
 };
 
 
+ /**
+ * Loads carbon intensity from carbon intensity API
+ *
+ * @param {string} variable
+ */
+ function loadCarbonIndex(variable) {
+  // load the variable from API
+  fetch("https://api.carbonintensity.org.uk/regional")
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      const regions = data.data[0].regions;
+      //console.log(regions);
+      const regionData = [];
+      regions.forEach((region) => {
+        const regionInfo = {
+          regionid: region.regionid,
+          shortname: region.shortname,
+          intensity: region.intensity.forecast,
+        };
+          regionData.push(regionInfo);
 
+          // calc min and max values
+          
+          });
+  
+      //console.log("Region Data ;" , regionData)
+    })
+    //.catch((error) => console.error("Error:", error));
+  
+
+}
 
 
 

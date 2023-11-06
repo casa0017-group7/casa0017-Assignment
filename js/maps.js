@@ -35,6 +35,11 @@ async function initMap() {
 
 }
 
+initMap();
+
+
+// ================== functions to be loaded onto maps ============================= //
+
 
 //Load the boundaries polygon from Geojson files
 function loadPolygon () {
@@ -49,20 +54,7 @@ function loadPolygon () {
 };
 
 
-// /**
-//  * Loads carbon intensity from carbon intensity API
-//  *
-//  * @param {string} variable
-//  */
-// function loadCarbonIndex(variable) {
-//   // load the variable from API
-//   const  = new XMLHttpRequest();
 
-//   xhr.open("GET", variable + ".json");
-//   xhr.onload = function () {
-//     const censusData = JSON.parse(xhr.responseText);
-
-// }
 
 
 
@@ -96,5 +88,4 @@ function hoverOut(e) {
 }
 
 
-initMap();
 

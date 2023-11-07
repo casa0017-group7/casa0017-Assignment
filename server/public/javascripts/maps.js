@@ -99,11 +99,11 @@ function hoverIn(e) {
       zIndex: 1,
     });
     if(locationName != nameFrom){
-      hoverFlag = true;
       nameFrom = locationName;
       // update the styling of the feature
       console.log(locationName);
     }
+    hoverFlag = true;
   }
 }
 

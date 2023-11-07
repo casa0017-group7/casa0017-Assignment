@@ -74,10 +74,26 @@ function loadPolygon () {
  * @param {?google.maps.MapMouseEvent} e
  */
 
+
+var infoElement = document.getElementById('info');
+
+document.addEventListener('mousemove', function(e) {
+  var mouseX = e.clientX;
+  var mouseY = e.clientY;
+  
+  infoElement.style.left = mouseX + 'px';
+    infoElement.style.top = mouseY + 'px';
+  
+});
+
 function hoverIn(e) {
   // set the hover state
   e.feature.setProperty("state", "hover");
-
+  
+  //display tooltip
+  var locationName = e.feature.getProperty('name');
+  infoElement.innerHTML = locationName;
+  infoElement.style.display = 'block';
 
   // update the styling of the feature 
   map.data.revertStyle();
@@ -86,8 +102,9 @@ function hoverIn(e) {
     strokeWeight: 1,
     zIndex: 1,
     
+    
   });
-
+  console.log(locationName);
 }
 
 function hoverOut(e) {
@@ -97,8 +114,13 @@ function hoverOut(e) {
   strokeColor: "#000000",
   strokeWeight: 1,
   zIndex: 1,
+  
   });
+
+  //hide tooltip
+  infoElement.style.display = 'none'; 
 }
 
 
 initMap();
+

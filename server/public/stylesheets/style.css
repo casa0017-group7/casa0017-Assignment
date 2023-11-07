@@ -37,3 +37,12 @@ main{
   margin: auto;
 
 }
+
+#info {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 5px;
+  z-index: 1000;
+  display: none; 
+}

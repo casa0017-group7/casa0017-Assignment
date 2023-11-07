@@ -57,9 +57,11 @@ main{
   display: none;
 }
 
-#custom-info-box {
-  display: none;
-  min-width: 100px; 
-  min-height: 50px; 
+.custom-info-box {
+  background-color: rgba(35, 133, 179, 0.231); 
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 3px
 }
+
 

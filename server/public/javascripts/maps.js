@@ -149,6 +149,7 @@ function clickFeature(e) {
   newInfoBox.className = 'custom-info-box'; 
   newInfoBox.style.display = 'inline-block'; 
   newInfoBox.style.margin = '5px'; 
+  newInfoBox.style.backgroundcolor='#111111'; 
 
   newInfoBox.innerHTML = '<span class="selected-region-name"></span><button class="close-button">x</button>';
 

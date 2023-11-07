@@ -3,7 +3,8 @@ let map;
 let carbonMin = Number.MAX_VALUE,
   carbonMax = -Number.MAX_VALUE;
 
-var regioninuk = "./resources/UK.geojson"
+var regioninuk = "./resources/UK.geojson";
+var CarbonApiUrl = "https://api.carbonintensity.org.uk/regional";
 
 
 
@@ -30,9 +31,10 @@ async function initMap() {
   map.data.addListener("mouseout", hoverOut);
 
 
-  //Call function to load polygon boundaries
-  loadPolygon();
 
+   //Call function to load polygon boundaries
+  loadPolygon();
+  loadCarbonIndex(CarbonApiUrl);
 }
 
 initMap();
@@ -44,13 +46,20 @@ initMap();
 //Load the boundaries polygon from Geojson files
 function loadPolygon () {
   // Load Geojson files
-  map.data.loadGeoJson(regioninuk);
+  map.data.loadGeoJson(regioninuk, 
+    { idPropertyName: "code"});
   
   map.data.setStyle({
     strokeWeight: 0.5,
     strokeColor:  "#ffffff"
-
     });
+
+  // google.maps.event.addListenerOnce(map.data, "addfeature", ( => {
+  //   google.maps.event.trigger(
+  //     document.getElementBy
+      
+  //   )
+  // }))  
 };
 
 
@@ -61,7 +70,7 @@ function loadPolygon () {
  */
  function loadCarbonIndex(variable) {
   // load the variable from API
-  fetch("https://api.carbonintensity.org.uk/regional")
+  fetch(variable)
     .then((response) => {
       return response.json();
     })
@@ -70,37 +79,47 @@ function loadPolygon () {
       //console.log(regions);
       const regionData = [];
       regions.forEach((region) => {
-        const regionInfo = {
-          regionid: region.regionid,
-          shortname: region.shortname,
-          intensity: region.intensity.forecast,
-        };
-          regionData.push(regionInfo);
+        const regionInfo = region.regionid;
+        const shortName = region.shortName;
+        const forecast =  region.intensity.forecast;
+    
+        //regionData.push(regionInfo);
+        console.log(region);
+        console.log(region.regionid);
 
-          // calc min and max values
-          
-          });
+        // calc min and max values
+        if (forecast < carbonMin) {
+          carbonMin = forecast;
+        }
+
+        if (forecast > carbonMax) {
+          carbonMax = forecast;
+        }
+        //console.log(carbonMin);
+        //console.log(carbonMax);
+
+        const state = map.data.getFeatureById(regionInfo);
+        
+        if (state) {
+          state.setProperty("carbonIndex", forecast)
+        }
+
+        //console.log(state);
+        console.log(regionInfo);
+      });
   
       //console.log("Region Data ;" , regionData)
     })
     //.catch((error) => console.error("Error:", error));
   
-
 }
 
 
 
-
-/**
- * Responds to the mouse-in event on a map shape (state).
- *
- * @param {?google.maps.MapMouseEvent} e
- */
-
 function hoverIn(e) {
   // set the hover state
   e.feature.setProperty("state", "hover");
-  console.log(e.feature.getProperty("state"));
+  console.log(e.feature.getProperty("state") + " at region");
 
   // update the styling of the feature 
   map.data.revertStyle();

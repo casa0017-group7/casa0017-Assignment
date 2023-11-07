@@ -5,6 +5,8 @@ let carbonMin = Number.MAX_VALUE,
 
 var regioninuk = "./resources/UK.geojson"
 
+
+
 let hoverFlag = false;
 let nameFrom = null;
 
@@ -18,6 +20,8 @@ async function initMap() {
   const { Map } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
+  document.body.appendChild(infoElement);
+  
   // The map, centered at Uluru
   map = new Map(document.getElementById("map-canvas"), {
     zoom: 6.2,
@@ -29,7 +33,7 @@ async function initMap() {
   //map.data.setStyle(styleFeature);
   map.data.addListener("mouseover", hoverIn);
   map.data.addListener("mouseout", hoverOut);
-
+  map.data.addListener('click', clickFeature);
 
   //Call function to load polygon boundaries
   loadPolygon();
@@ -89,7 +93,7 @@ function hoverIn(e) {
     e.feature.setProperty("state", "hover");
     //display tooltip
     var locationName = e.feature.getProperty('name');
-    console.log(locationName)
+    
     infoElement.innerHTML = locationName;
     infoElement.style.display = 'block';
     map.data.revertStyle();
@@ -101,7 +105,7 @@ function hoverIn(e) {
     if(locationName != nameFrom){
       nameFrom = locationName;
       // update the styling of the feature
-      console.log(locationName);
+      
     }
     hoverFlag = true;
   }
@@ -122,6 +126,58 @@ function hoverOut(e) {
   }
 }
 
+
+
+
+
+
+function clickFeature(e) {
+    // get region name
+  var locationName = e.feature.getProperty('name');
+
+  // check there is not same content
+  var existingInfoBoxes = document.querySelectorAll('.custom-info-box');
+  for (var i = 0; i < existingInfoBoxes.length; i++) {
+    var existingLocationName = existingInfoBoxes[i].querySelector('.selected-region-name').textContent;
+    if (existingLocationName === locationName) {
+      return; 
+    }
+  }
+
+  // add box to place region name
+  var newInfoBox = document.createElement('div');
+  newInfoBox.className = 'custom-info-box'; 
+  newInfoBox.style.display = 'inline-block'; 
+  newInfoBox.style.margin = '5px'; 
+
+  newInfoBox.innerHTML = '<span class="selected-region-name"></span><button class="close-button">x</button>';
+
+  // set region name 
+  newInfoBox.querySelector('.selected-region-name').textContent = locationName;
+
+  // link to div which id is custom-container
+  var customContainer = document.getElementById('custom-container');
+  if (customContainer) {
+    
+  // add to custom-container div
+  customContainer.appendChild(newInfoBox);
+
+  // add close button
+  var closeButton = newInfoBox.querySelector('.close-button');
+
+  //close button style
+  closeButton.style.background = 'none';
+  closeButton.style.border = 'none';
+  closeButton.style.outline = 'none';
+
+  closeButton.addEventListener('click', function() {
+    newInfoBox.remove(); 
+  });
+  }
+  
+
+  console.log(locationName);
+}
 
 initMap();
 

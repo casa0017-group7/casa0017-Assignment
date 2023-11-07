@@ -71,11 +71,11 @@
     </div>
     <div class="offcanvas-body">
       <h5 class="mb-3">Selected Region</h5>
-      <div class="toast show" style="width:80px; box-shadow: none;">
-        <div class="d-flex" style=" justify-content: center;vertical-align: middle; padding-top: 10px; ">
-        <p style="display: inline-block;">London</p>
-        <span type="button" class="btn-close"  data-bs-dismiss="toast"></span>
-        </div>
+      <div>
+        
+        <!--place region name when selected region-->
+        <div id="custom-container"></div>
+
       </div>
       <h5 class="my-3">Energy type comparison for selected region</h5>
       <div class="mb-5" id="barchart_material" style="width: 500px; height: 250px; z-index: 1;"></div>
@@ -88,6 +88,7 @@
   <p style="transform: rotate(90deg); transform-origin: left top 0;margin-left: 100px;">CarbonIntensity(gCO₂eq/kWh)</p>
 </div>
 
+<div id="region-info" ></div>
 <div id="info" ></div>
 <!--map display-->
   <div id="map-canvas" style="position: relative; ">

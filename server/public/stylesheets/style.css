@@ -46,3 +46,20 @@ main{
   z-index: 1000;
   display: none; 
 }
+
+
+#region-info {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 5px;
+  z-index: 1000;
+  display: none;
+}
+
+#custom-info-box {
+  display: none;
+  min-width: 100px; 
+  min-height: 50px; 
+}
+

@@ -6,6 +6,7 @@ let carbonMin = Number.MAX_VALUE,
 var regioninuk = "./resources/UK.geojson"
 
 let hoverFlag = false;
+let nameFrom = null;
 
 // var eastMidlands = "https://findthatpostcode.uk/areas/E12000004.geojson"
 
@@ -84,23 +85,25 @@ document.addEventListener('mousemove', function(e) {
 
 function hoverIn(e) {
   if (hoverFlag === false){
-    hoverFlag = true;
     // set the hover state
     e.feature.setProperty("state", "hover");
-
     //display tooltip
     var locationName = e.feature.getProperty('name');
     infoElement.innerHTML = locationName;
     infoElement.style.display = 'block';
 
-    // update the styling of the feature
-    map.data.revertStyle();
-    map.data.overrideStyle(e.feature, {
-      strokeColor: "#ffffff", // white border
-      strokeWeight: 1,
-      zIndex: 1,
-    });
-    console.log(locationName);
+    if(locationName != nameFrom){
+      hoverFlag = true;
+      nameFrom = locationName;
+      // update the styling of the feature
+      map.data.revertStyle();
+      map.data.overrideStyle(e.feature, {
+        strokeColor: "#ffffff", // white border
+        strokeWeight: 1,
+        zIndex: 1,
+      });
+      console.log(locationName);
+    }
   }
 }
 

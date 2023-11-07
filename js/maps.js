@@ -22,7 +22,10 @@ async function initMap() {
   map = new Map(document.getElementById("map-canvas"), {
     zoom: 6.2,
     center: position,
-    styles: carbon
+    styles: carbon,
+    disableDefaultUI: true,
+
+
 
   });
 
@@ -53,7 +56,7 @@ function loadPolygon () {
   
   map.data.setStyle({
     strokeColor:  "#ffffff",
-    strokeWeight: 1,
+    strokeWeight: 0.5,
     
     });
 
@@ -128,7 +131,7 @@ function hoverIn(e) {
   map.data.revertStyle();
   map.data.overrideStyle(e.feature, {
     strokeColor: "#ffffff", // white border
-    strokeWeight: 2,
+    strokeWeight: 2.5,
     zIndex: 2,
 
     

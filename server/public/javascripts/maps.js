@@ -79,8 +79,8 @@ document.addEventListener('mousemove', function(e) {
   var mouseX = e.clientX;
   var mouseY = e.clientY;
   
-  infoElement.style.left = mouseX + 'px';
-  infoElement.style.top = mouseY + 'px';
+  infoElement.style.left = mouseX + 5 + 'px';
+  infoElement.style.top = mouseY + 5 + 'px';
 });
 
 function hoverIn(e) {
@@ -89,6 +89,7 @@ function hoverIn(e) {
     e.feature.setProperty("state", "hover");
     //display tooltip
     var locationName = e.feature.getProperty('name');
+    console.log(locationName)
     infoElement.innerHTML = locationName;
     infoElement.style.display = 'block';
     map.data.revertStyle();

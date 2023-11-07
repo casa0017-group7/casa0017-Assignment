@@ -3,27 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Map</title>
   <!--bootstrap.css-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
   <!--bootstrap.icon.css-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
   <link rel='stylesheet' href='./css/style.css' type='text/css'/>
+    <!--google charts-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
   <!-- javascript file -->
   <script type="module" src="./js/maps.js"></script>
   <script type="text/javascript" src="./js/mapStyle.js"></script>
   <script type="text/javascript" src="./js/animation.js"></script>
+  <script type="text/javascript" src="./js/barchart.js"></script>
+  <script type="text/javascript" src="./js/linechart.js"></script>
+
 
 </head>
 <body class="bg-dark" >
  
+<!--navbar on top-->
+  <nav class="navbar navbar-expand-lg bg-dark border-bottom border-white border-1 border-opacity-25" style="flex:2;z-index: 2;">
+    <div class="container-fluid mx-3 " >
+      <span data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" style="cursor:pointer;">
+      <span class="bi bi-list me-5" style="color:#ffffff;font-size: 25px;"></span>
+      </span>
 
-  <nav class="navbar navbar-expand-lg bg-dark" style="z-index: 2;">
-    <div class="container">
+
       <a href="#" class="navbar-brand text-white">
-        <img src="img/Group 4 (2).png">
+        <img src="img/Group 4 (2).png" type="button" onclick='location.href=("index.html")'>
         </a>
       <button 
         class="navbar-toggler text-white" 
@@ -42,37 +52,35 @@
     </div>
   </nav>
 
-
-<main class="bg-dark text-light text-center text-lg-start" style="flex:1">
-  <div class="container">
-    
-    <div class="d-flex">
-      <div style="display:flex; flex-direction: column; justify-content: center; flex=1">
-        <h2>Compare the <span class="text-warning ">Carbon Intensity </span>and Related Policies in UK</h2>
-        <p class="my-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad id iure ea, unde aliquid accusantium, sed, enim veritatis totam qui voluptatem ipsam facilis commodi nulla. Assumenda temporibus quaerat mollitia beatae.</p>
-        <div>
-          <button class="btn btn-primary btn-lg" id="scroll-to-map" type="button" onclick='location.href=("map.html")'>
-            Start
-          </button>
-        </div>
-      </div>
-    <img src="img/UKmap.png" alt="showcase" class="d-none d-lg-block ms-5" style="width:400px" >
+  
+<!--sidebar for charts display-->
+  <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style="margin-top: 75px; background-color: rgb(255, 255, 255);z-index: 3; width:600px">
+    <div class="offcanvas-header">
+      <h3 class="offcanvas-title" id="offcanvasScrollingLabel">Carbon Intensity Data</h3>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-   
+    <div class="offcanvas-body">
+      <h5 class="mb-3">Energy type comparison for selected region</h5>
+      <div class="mb-5" id="barchart_material" style="width: 500px; height: 300px; z-index: 1;"></div>
+      <h5 class="mb-3">Carbon intensity history</h5>
+      <div id="curve_chart" style="width: 500px; height: 300px; z-index: 1;"></div>
+    </div>
+    
+
+    
+  </div>
+
+<!--map display-->
+<div id="map-canvas">
 </div>
 
 
-<!-- <footer class="text-center mt-5 text-white-50" style="height:50px;">
-  <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
-</footer> -->
-
-</main>
- 
 
 
-  <!--bootstrap.js-->
+
+  <!--Jquery-->
   <script type='text/javascript' src='https://code.jquery.com/jquery-3.5.1.js'></script>
-
+  <!--bootstrap.js-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <!-- Load google maps API -->
   <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})

@@ -23,6 +23,7 @@ async function initMap() {
     zoom: 6.2,
     center: position,
     styles: carbon
+
   });
 
   // Add events for google maps
@@ -49,9 +50,11 @@ function loadPolygon () {
   map.data.loadGeoJson(regioninuk, 
     { idPropertyName: "code"});
   
+  
   map.data.setStyle({
-    strokeWeight: 0.5,
-    strokeColor:  "#ffffff"
+    strokeColor:  "#ffffff",
+    strokeWeight: 1,
+    
     });
 
   // google.maps.event.addListenerOnce(map.data, "addfeature", ( => {
@@ -127,6 +130,8 @@ function hoverIn(e) {
     strokeColor: "#ffffff", // white border
     strokeWeight: 2,
     zIndex: 2,
+
+    
   });
 
 }

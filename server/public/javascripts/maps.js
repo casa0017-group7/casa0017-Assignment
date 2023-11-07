@@ -5,7 +5,7 @@ let carbonMin = Number.MAX_VALUE,
 
 var regioninuk = "./resources/UK.geojson"
 
-
+let hoverFlag = false;
 
 // var eastMidlands = "https://findthatpostcode.uk/areas/E12000004.geojson"
 
@@ -22,7 +22,6 @@ async function initMap() {
     zoom: 6.2,
     center: position,
     styles: carbon
-
   });
 
   // Add events for google maps
@@ -47,7 +46,7 @@ function loadPolygon () {
     strokeWeight: 1,
     
     });
-};
+}
 
 
 // /**
@@ -66,8 +65,6 @@ function loadPolygon () {
 // }
 
 
-
-
 /**
  * Responds to the mouse-in event on a map shape (state).
  *
@@ -82,43 +79,44 @@ document.addEventListener('mousemove', function(e) {
   var mouseY = e.clientY;
   
   infoElement.style.left = mouseX + 'px';
-    infoElement.style.top = mouseY + 'px';
-  
+  infoElement.style.top = mouseY + 'px';
 });
 
 function hoverIn(e) {
-  // set the hover state
-  e.feature.setProperty("state", "hover");
-  
-  //display tooltip
-  var locationName = e.feature.getProperty('name');
-  infoElement.innerHTML = locationName;
-  infoElement.style.display = 'block';
+  if (hoverFlag === false){
+    hoverFlag = true;
+    // set the hover state
+    e.feature.setProperty("state", "hover");
 
-  // update the styling of the feature 
-  map.data.revertStyle();
-  map.data.overrideStyle(e.feature, {
-    strokeColor: "#ffffff", // white border
-    strokeWeight: 1,
-    zIndex: 1,
-    
-    
-  });
-  console.log(locationName);
+    //display tooltip
+    var locationName = e.feature.getProperty('name');
+    infoElement.innerHTML = locationName;
+    infoElement.style.display = 'block';
+
+    // update the styling of the feature
+    map.data.revertStyle();
+    map.data.overrideStyle(e.feature, {
+      strokeColor: "#ffffff", // white border
+      strokeWeight: 1,
+      zIndex: 1,
+    });
+    console.log(locationName);
+  }
 }
 
 function hoverOut(e) {
-  //reset the hover state
-  e.feature.setProperty("state", "normal");
-  map.data.overrideStyle(e.feature, {
-  strokeColor: "#000000",
-  strokeWeight: 1,
-  zIndex: 1,
-  
-  });
-
-  //hide tooltip
-  infoElement.style.display = 'none'; 
+  if (hoverFlag === true){
+    hoverFlag = false;
+    //reset the hover state
+    e.feature.setProperty("state", "normal");
+    map.data.overrideStyle(e.feature, {
+      strokeColor: "#000000",
+      strokeWeight: 1,
+      zIndex: 1,
+    });
+    //hide tooltip
+    infoElement.style.display = 'none';
+  }
 }
 
 

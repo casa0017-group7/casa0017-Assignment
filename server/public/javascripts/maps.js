@@ -91,17 +91,16 @@ function hoverIn(e) {
     var locationName = e.feature.getProperty('name');
     infoElement.innerHTML = locationName;
     infoElement.style.display = 'block';
-
+    map.data.revertStyle();
+    map.data.overrideStyle(e.feature, {
+      strokeColor: "#ffffff", // white border
+      strokeWeight: 1,
+      zIndex: 1,
+    });
     if(locationName != nameFrom){
       hoverFlag = true;
       nameFrom = locationName;
       // update the styling of the feature
-      map.data.revertStyle();
-      map.data.overrideStyle(e.feature, {
-        strokeColor: "#ffffff", // white border
-        strokeWeight: 1,
-        zIndex: 1,
-      });
       console.log(locationName);
     }
   }

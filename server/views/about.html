@@ -26,9 +26,9 @@
   }
    </style>
 </head>
-<body class="bg-dark">
-  <nav class="navbar navbar-expand-lg bg-dark  border-white border-1 border-opacity-50" style="z-index: 2;">
-    <div class="container-fluid mx-3">
+<body>
+  <nav class="navbar navbar-expand-lg bg-dark" style="z-index: 2;">
+    <div class="container">
       <a href="#" class="navbar-brand text-white">
         <img src="http://localhost:3000/images/logo.png" type="button" onclick='location.href=("/index")'>
         </a>
@@ -50,39 +50,44 @@
   </nav>
 
 
- 
-
   
-  <main class="bg-dark text-light text-center text-lg-start" style="flex:1"> 
-    <div class="container"> 
-      <div class="d-flex">
-        
-            <h1>CarbonMap&nbsp;-&nbsp;Serve The Future</h1></div>
-            <br>
-            <br>
-            <h3>A website to <span class="text-warning">visualize the data of each region's carbon intensity</span> in the United Kingdom .</h3>
-            <br>
-            <br>
-            <p class="lead">
-              <a href="#introduction" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
-            </p>
+  <div class=" text-light text-center text-lg-start" style="flex:1" > 
+    <div> 
+      
+      <div style="background-image:url('http://localhost:3000/images/banner.png');padding:50px; background-repeat: no-repeat;background-attachment: fixed;
+      background-size: 100%;">
+        <div class="container">
+          <h1>CarbonMap&nbsp;-&nbsp;Serve The Future</h1>
+          <h3 class="mt-5">A website to <span class="text-warning">visualize the data of each region's carbon intensity</span> in the United Kingdom .</h3>
+      
+          <p class="lead my-5">
+            <a href="#introduction" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
+          </p>
+        </div>
+      </div>
     
-
-    <hr class="featurette-divider">
-
-    <h1 id="introduction">Why we create <strong class="text-warning">carbon intensity</strong> data visulization website?</h1>
+<div class="container" style="color:black" >
+  <div class="d-flex">  
+    <div style="display:flex; flex-direction: column; justify-content: center;">
+  <h3 id="introduction">Why we create <strong class="text-warning">carbon intensity</strong> data visulization website?</h3>
     <div>&nbsp;</div>
-    <h2>The reason why our team decide to establish carbon intensity data visualization website is in <strong class="text-warning">"5 Steps Go"</strong> flow chart.</h2>
+    <p style="font-size:20px">The reason why our team decide to establish carbon intensity data visualization website is in <strong class="text-warning">"5 Steps Go"</strong> flow chart.</p>
     
-
+    </div>
     <div style="text-align: center;">
     
     <div>&nbsp;</div>
-    <img src="http://localhost:3000/images/5 steps go.jpg" alt="5 steps go" width="800px" style="text-align: center;">
-    <div>&nbsp;</div>
-    <hr class="featurette-divider">
-    
+    <img src="http://localhost:3000/images/5 steps go.jpg" alt="5 steps go" width="800px" style="text-align: center; width:80%">
 
+    
+    <div>&nbsp;</div>
+   
+    </div>
+  </div>
+  <hr class="featurette-divider">
+
+
+    
     <br>
         <div class="row featurette">
             <div class="col-md-7 order-md-2">
@@ -184,6 +189,7 @@
         </div>
         </div>
       </div>
-  </main>
+    </div>
+  </div>
 </body>
 </html>

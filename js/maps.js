@@ -13,10 +13,10 @@ var CarbonApiUrl = "https://api.carbonintensity.org.uk/regional";
 async function initMap() {
   // The location of London
   const position = { lat: 54.6819964, lng: -4.0084773 };
-  // Request needed libraries.
-  //@ts-ignore
+
+
   const { Map } = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+  //const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
   // The map, centered at London
   map = new Map(document.getElementById("map-canvas"), {
@@ -31,13 +31,11 @@ async function initMap() {
   });
 
   // Add events for google maps
-  //map.data.setStyle(styleFeature);
+  map.data.setStyle(setFeatureStyle);
   map.data.addListener("mouseover", hoverIn);
   map.data.addListener("mouseout", hoverOut);
 
-
-
-   //Call function to load polygon boundaries
+  //Call function to load polygon boundaries
   loadPolygon();
   //loadCarbonIndex(CarbonApiUrl);
 }
@@ -54,28 +52,26 @@ function loadPolygon () {
   map.data.loadGeoJson(regioninuk, 
     { idPropertyName: "name"}, 
     function(features) {
-      loadCarbonIndex();
+      loadCarbonIndex(CarbonApiUrl);
     });
     
     
   
-    //console.log(map.data);
-  map.data.setStyle({
-    strokeColor:  "#ffffff",
-    strokeWeight: 0.5,
+  //   //console.log(map.data);
+  // map.data.setStyle({
+  //   strokeColor:  "#ffffff",
+  //   strokeWeight: 0.5,
     
-    });
+  //   });
 };
 
 
- /**
- * Loads carbon intensity from carbon intensity API
- *
- * @param {string} variable
- */
- function loadCarbonIndex() {
+ 
+ //* Loads carbon intensity from carbon intensity API
 
-fetch(CarbonApiUrl)
+ function loadCarbonIndex(variable) {
+
+fetch(variable)
   .then(response => {
     return response.json();
   })
@@ -102,8 +98,8 @@ fetch(CarbonApiUrl)
           if (forecast > carbonMax) {
             carbonMax = forecast;
           }
-          // console.log(carbonMin);
-          // console.log(carbonMax);
+          console.log(carbonMin);
+          console.log(carbonMax);
 
           state = map.data.getFeatureById(translatedName);
           console.log(state);
@@ -118,7 +114,7 @@ fetch(CarbonApiUrl)
 
         });
 
-        console.log("Region Data (regionid and shortname):", regionData);
+        //console.log("Region Data (regionid and shortname):", regionData);
       } else {
         console.log("Regions data not found.");
       }
@@ -130,21 +126,49 @@ fetch(CarbonApiUrl)
   
 }
 
+// Apply style for gradient color
+function setFeatureStyle(feature) {
+  // Define the low and high colors
+  const lowColor = [216, 255, 211]; // RGB for low value
+  const highColor = [255, 100, 32];   // RGB for high value
 
+  // Access the carbonIndex from the feature properties
+  const carbonIndex = feature.getProperty("carbonIndex");
+
+  // Calculate the interpolation factor based on the carbonIndex
+  const factor = (carbonIndex - carbonMin) / (carbonMax - carbonMin);
+
+  // Interpolate the color
+  const interpolate = interpolateColor(lowColor, highColor, factor);
+
+  return {
+    strokeWeight: 0.5,
+    strokeColor: "#2a2a2a",
+    fillColor: `rgb(${interpolate[0]}, ${interpolate[1]}, ${interpolate[2]})`,
+    fillOpacity: 1,
+  };
+}
+
+// Function to interpolate color based on a factor
+function interpolateColor(color1, color2, factor) {
+  const result = [];
+  for (let i = 0; i < 3; i++) {
+    result[i] = Math.round(color1[i] + (color2[i] - color1[i]) * factor);
+  }
+  return result;
+}
 
 function hoverIn(e) {
   // set the hover state
   e.feature.setProperty("state", "hover");
-  console.log(e.feature.getProperty("state") + " at region" + e.feature.getProperty("name") + " with carbon index " + e.feature.getProperty("carbonIndex"));
+  console.log(e.feature.getProperty("state") + " at region " + e.feature.getProperty("name") + " with carbon index " + e.feature.getProperty("carbonIndex"));
 
-  // update the styling of the feature 
+  //update the styling of the feature 
   map.data.revertStyle();
   map.data.overrideStyle(e.feature, {
     strokeColor: "#ffffff", // white border
     strokeWeight: 2.5,
-    zIndex: 2,
-
-    
+    zIndex: 2, 
   });
 
 }
@@ -163,7 +187,8 @@ function translateRegionName(geojsonName) {
     "Yorkshire": "Yorkshire and The Humber",
     "South West England": "South West",
     "South East England": "South East",
-    // Add more translations as needed
+    "East England" : "East of England",
+
   };
 
   return translations[geojsonName] || geojsonName;

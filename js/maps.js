@@ -11,14 +11,14 @@ var CarbonApiUrl = "https://api.carbonintensity.org.uk/regional";
 
 
 async function initMap() {
-  // The location of Uluru
+  // The location of London
   const position = { lat: 54.6819964, lng: -4.0084773 };
   // Request needed libraries.
   //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-  // The map, centered at Uluru
+  // The map, centered at London
   map = new Map(document.getElementById("map-canvas"), {
     zoom: 6.2,
     center: position,

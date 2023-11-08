@@ -109,10 +109,10 @@ fetch(CarbonApiUrl)
           console.log(state);
 
           if (state !== undefined) {
-            state.setProperty("census_variable", forecast);
+            state.setProperty("carbonIndex", forecast);
             state.setProperty("name", translatedName);
             console.log(state.getProperty("name"));
-            console.log(state.getProperty("census_variable"));
+            console.log(state.getProperty("carbonIndex"));
 
           }
 
@@ -135,7 +135,7 @@ fetch(CarbonApiUrl)
 function hoverIn(e) {
   // set the hover state
   e.feature.setProperty("state", "hover");
-  console.log(e.feature.getProperty("state") + " at region" + e.feature.getProperty("name") + " with carbon index " + e.feature.getProperty("census_variable"));
+  console.log(e.feature.getProperty("state") + " at region" + e.feature.getProperty("name") + " with carbon index " + e.feature.getProperty("carbonIndex"));
 
   // update the styling of the feature 
   map.data.revertStyle();

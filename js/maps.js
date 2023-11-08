@@ -1,5 +1,7 @@
 let map;
 
+let carbonData = [];
+var state = [];
 let carbonMin = Number.MAX_VALUE,
   carbonMax = -Number.MAX_VALUE;
 
@@ -7,8 +9,6 @@ var regioninuk = "./resources/UK.geojson";
 var CarbonApiUrl = "https://api.carbonintensity.org.uk/regional";
 
 
-
-// var eastMidlands = "https://findthatpostcode.uk/areas/E12000004.geojson"
 
 async function initMap() {
   // The location of Uluru
@@ -24,6 +24,7 @@ async function initMap() {
     center: position,
     styles: carbon,
     disableDefaultUI: true,
+    fullscreenControl: true
 
 
 
@@ -38,7 +39,7 @@ async function initMap() {
 
    //Call function to load polygon boundaries
   loadPolygon();
-  loadCarbonIndex(CarbonApiUrl);
+  //loadCarbonIndex(CarbonApiUrl);
 }
 
 initMap();
@@ -51,21 +52,19 @@ initMap();
 function loadPolygon () {
   // Load Geojson files
   map.data.loadGeoJson(regioninuk, 
-    { idPropertyName: "code"});
+    { idPropertyName: "name"}, 
+    function(features) {
+      loadCarbonIndex();
+    });
+    
+    
   
-  
+    //console.log(map.data);
   map.data.setStyle({
     strokeColor:  "#ffffff",
     strokeWeight: 0.5,
     
     });
-
-  // google.maps.event.addListenerOnce(map.data, "addfeature", ( => {
-  //   google.maps.event.trigger(
-  //     document.getElementBy
-      
-  //   )
-  // }))  
 };
 
 
@@ -74,49 +73,60 @@ function loadPolygon () {
  *
  * @param {string} variable
  */
- function loadCarbonIndex(variable) {
-  // load the variable from API
-  fetch(variable)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      const regions = data.data[0].regions;
+ function loadCarbonIndex() {
+
+fetch(CarbonApiUrl)
+  .then(response => {
+    return response.json();
+  })
+  .then(data => {
+    if (data && data.data) {
+      const regions = data.data[0].regions; // Assuming there's only one region in the response
       //console.log(regions);
-      const regionData = [];
-      regions.forEach((region) => {
-        const regionInfo = region.regionid;
-        const shortName = region.shortName;
-        const forecast =  region.intensity.forecast;
-    
-        //regionData.push(regionInfo);
-        console.log(region);
-        console.log(region.regionid);
+      if (regions) {
+        const regionData = [];
 
-        // calc min and max values
-        if (forecast < carbonMin) {
-          carbonMin = forecast;
-        }
+        regions.forEach(region => {
+          //const regionid = region.regionid;
+          const name = region.shortname;
+          const forecast = region.intensity.forecast;
+          const translatedName = translateRegionName(name);
+          console.log(name);
+          console.log(translatedName); 
 
-        if (forecast > carbonMax) {
-          carbonMax = forecast;
-        }
-        //console.log(carbonMin);
-        //console.log(carbonMax);
+          //regionData.push(regionInfo);
 
-        const state = map.data.getFeatureById(regionInfo);
-        
-        if (state) {
-          state.setProperty("carbonIndex", forecast)
-        }
+          if (forecast < carbonMin) {
+            carbonMin = forecast;
+          }
+          if (forecast > carbonMax) {
+            carbonMax = forecast;
+          }
+          // console.log(carbonMin);
+          // console.log(carbonMax);
 
-        //console.log(state);
-        console.log(regionInfo);
-      });
-  
-      //console.log("Region Data ;" , regionData)
-    })
-    //.catch((error) => console.error("Error:", error));
+          state = map.data.getFeatureById(translatedName);
+          console.log(state);
+
+          if (state !== undefined) {
+            state.setProperty("census_variable", forecast);
+            state.setProperty("name", translatedName);
+            console.log(state.getProperty("name"));
+            console.log(state.getProperty("census_variable"));
+
+          }
+
+        });
+
+        console.log("Region Data (regionid and shortname):", regionData);
+      } else {
+        console.log("Regions data not found.");
+      }
+    } else {
+      console.log("Data not found in the response.");
+    }
+  })
+  .catch(error => console.error("Error:", error));
   
 }
 
@@ -125,7 +135,7 @@ function loadPolygon () {
 function hoverIn(e) {
   // set the hover state
   e.feature.setProperty("state", "hover");
-  console.log(e.feature.getProperty("state") + " at region");
+  console.log(e.feature.getProperty("state") + " at region" + e.feature.getProperty("name") + " with carbon index " + e.feature.getProperty("census_variable"));
 
   // update the styling of the feature 
   map.data.revertStyle();
@@ -146,5 +156,17 @@ function hoverOut(e) {
 
 }
 
+function translateRegionName(geojsonName) {
+  const translations = {
+    "North West England": "North West",
+    "North East England": "North East",
+    "Yorkshire": "Yorkshire and The Humber",
+    "South West England": "South West",
+    "South East England": "South East",
+    // Add more translations as needed
+  };
+
+  return translations[geojsonName] || geojsonName;
+}
 
 

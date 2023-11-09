@@ -32,7 +32,7 @@ main{
 }
 
 #map-canvas {
-  height: 92%;
+  height: 90%;
   width: 100%;
   margin: auto;
 
@@ -47,6 +47,36 @@ main{
   display: none; 
 }
 
+.flex-container {
+  display: flex;
+  position: absolute;
+  text-align: center;
+  font: arial;
+  z-index: 5;
+}
+#legend {
+  display: flex;
+  display: -webkit-box;
+  padding-top: 7px;
+}
+
+.color-key {
+  background: linear-gradient(to right, rgb(246,239,247) 0%, rgb(144, 224, 239) 25%, rgb(0, 180, 216) 50%, rgb(0, 119, 182) 75%, rgb(3, 4, 94) 100%);
+  flex: 1;
+  -webkit-box-flex: 1;
+  margin: 0 5px;
+  text-align: left;
+  font-size: 1em;
+  line-height: 1em;
+}
+
+#data-caret {
+  margin-left: -15px;
+  display: none;
+  font-size: 20px;
+  width: 14px;
+  font-weight: 300;
+}
 
 #region-info {
   position: absolute;

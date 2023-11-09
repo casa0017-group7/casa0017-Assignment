@@ -13,6 +13,13 @@
 <!--bootstrap.icon.css-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="/stylesheets/style.css">
+
+  <!--Jquery-->
+  <script type='text/javascript' src='https://code.jquery.com/jquery-3.5.1.js'></script>
+
+   <!--bootstrap.js-->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
 <style>
   main{
    
@@ -24,11 +31,26 @@
    z-index: 1;
    
   }
+
+  .buttonstyle{
+    height:100px;
+    width:200px;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    background-color: rgba(0, 60, 110, 0.2);
+    margin-top: 20px;
+    margin-bottom: 60px;
+
+  }
+  .buttonstyle:hover{
+    background-color: rgba(0, 60, 110, 0.4);
+  }
    </style>
 </head>
-<body class="bg-dark">
-  <nav class="navbar navbar-expand-lg bg-dark  border-white border-1 border-opacity-50" style="z-index: 2;">
-    <div class="container-fluid mx-3">
+<body>
+  <nav class="navbar navbar-expand-lg bg-dark" style="z-index: 2;">
+    <div class="container">
       <a href="#" class="navbar-brand text-white">
         <img src="http://localhost:3000/images/logo.png" type="button" onclick='location.href=("/index")'>
         </a>
@@ -42,6 +64,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navmenu">
         <ul class="navbar nav ms-auto">
+          <li class="nav-item"><div class="nav-link text-white" type="button" onclick='location.href=("/map")'>map</div></li>
           <li class="nav-item"><div class="nav-link text-white" type="button" onclick='location.href=("/resources")'>Resources</div></li>
           <li class="nav-item"><div class="nav-link text-white" type="button" onclick='location.href=("/about")'>About</div></li>
         </ul>
@@ -50,89 +73,100 @@
   </nav>
 
 
- 
-
   
-  <main class="bg-dark text-light text-center text-lg-start" style="flex:1"> 
-    <div class="container"> 
-      <div class="d-flex">
-        
-            <h1>CarbonMap&nbsp;-&nbsp;Serve The Future</h1></div>
-            <br>
-            <br>
-            <h3>A website to <span class="text-warning">visualize the data of each region's carbon intensity</span> in the United Kingdom .</h3>
-            <br>
-            <br>
-            <p class="lead">
-              <a href="#introduction" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
-            </p>
-    
-
-    <hr class="featurette-divider">
-
-    <h1 id="introduction">Why we create <strong class="text-warning">carbon intensity</strong> data visulization website?</h1>
-    <div>&nbsp;</div>
-    <h2>The reason why our team decide to establish carbon intensity data visualization website is in <strong class="text-warning">"5 Steps Go"</strong> flow chart.</h2>
-    
-
-    <div style="text-align: center;">
-    
-    <div>&nbsp;</div>
-    <img src="http://localhost:3000/images/5 steps go.jpg" alt="5 steps go" width="800px" style="text-align: center;">
-    <div>&nbsp;</div>
-    <hr class="featurette-divider">
-    
-
-    <br>
-        <div class="row featurette">
-            <div class="col-md-7 order-md-2">
-              <h2 class="featurette-heading fw-normal lh-1" style="text-align: left;">Step&nbsp;1 &nbsp;<span class="text-body-secondary">&nbsp;Net Zero Target</span></h2>
-              <p class="lead" style="text-align: left;">In order to realize net zero target and combat climate change, all sectors of countries’ economy should take decarbonization measures to reduce their carbon emissions.</p>
-            </div>
-            <div class="col-md-5 order-md-1">
-                <img src="http://localhost:3000/images/net zero.jpg" alt="carbon" width="500">
-            </div>
-          </div>
+  <div class=" text-light text-center text-lg-start" style="flex:1" > 
+    <div> 
+      
+      <div style="background-image:url('http://localhost:3000/images/banner.png');padding:50px; background-repeat: no-repeat;background-attachment: fixed;
+      background-size: 100%;">
+        <div class="container">
+          <h1>CarbonMap&nbsp;-&nbsp;Serve The Future</h1>
+          <h3 class="mt-5">A website to <span class="text-warning">visualize the data of each region's carbon intensity</span> in the United Kingdom .</h3>
+      
+          <p class="lead my-5">
+            <a href="#introduction" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
+          </p>
         </div>
-        <br>
-        <hr class="featurette-divider">
-         
+      </div>
+    
+  <div class="container" style="color:black;margin-top: 50px;" >
+    
+    <div>  
+      <div style="display:flex; flex-direction: column; justify-content: center;">
+        <h2 class=square id="introduction"><span style="height:10px;width:10px;background-color: rgb(24,160,251);">&nbsp;</span>&nbsp;&nbsp;Why we create <strong class="text-warning">carbon intensity</strong> data visulization website?</h2>
+    </div>
+<div><h3 style="font-size: 22px; margin-top: 50px;"> &nbsp;&nbsp;&nbsp;&nbsp;Because we have 5 steps goal:</h3>
+    <div class="d-flex" style="justify-content: space-between;">
+      <div class="container mt-3">
+        <a  href="#demo1" class="btn buttonstyle"  data-bs-toggle="collapse" data-bs-target=".demo1"><strong>Step 1 </strong> Net Zero Target</a>
+      </div>
+      <div style="display:flex; flex-direction: column; justify-content: center;">
+      <i class="bi bi-caret-right-fill" style="font-size: 35px; color: rgb(16,97,151,0.5);"></i>
+      </div>
+      <div class="container mt-3">
+        <a  href="#demo2" class="btn buttonstyle" data-bs-toggle="collapse" data-bs-target=".demo2"><strong>Step 2 </strong>  Greenhouse Gases Protocol</a>
+      </div>
+      <div style="display:flex; flex-direction: column; justify-content: center;">
+        <i class="bi bi-caret-right-fill" style="font-size: 35px;color: rgb(16,97,151,0.5);"></i>
+        </div>
+      <div class="container mt-3">
+        <a  href="#demo3" class="btn buttonstyle" data-bs-toggle="collapse" data-bs-target=".demo3"><strong>Step 3 </strong>  Expand Renewable Energy Proportion
+        </a>
+      </div>
+      <div style="display:flex; flex-direction: column; justify-content: center;">
+        <i class="bi bi-caret-right-fill" style="font-size: 35px;color: rgb(16,97,151,0.5);"></i>
+        </div>
+      <div class="container mt-3">
+        <a  href="#demo4" class="btn buttonstyle" data-bs-toggle="collapse" data-bs-target=".demo4"><strong>Step 4 </strong>  Carbon Intensity</a>
+      </div>
+      <div style="display:flex; flex-direction: column; justify-content: center;">
+        <i class="bi bi-caret-right-fill" style="font-size: 35px;color: rgb(16,97,151,0.5);"></i>
+        </div>
+      <div class="container mt-3">
+        <a  href="#demo5" class="btn buttonstyle" data-bs-toggle="collapse" data-bs-target=".demo5"><strong>Step 5 </strong>  Data Visualization Website</a>
+      </div>
+    </div>
+  </div>
+    <divn id="accordion">
+    <div class="demo1 collapse" id="demo1" data-bs-parent="#accordion"> 
+      <div class="row featurette" style="color:black;">
         
+        <div class="col-md-5 order-md-1">
+            <img src="http://localhost:3000/images/net zero.jpg" alt="carbon" width="500">
+        </div>
+        <div class="col-md-7 order-md-2" >
+          <h2 class="featurette-heading fw-normal lh-1" style="text-align: left ;">Step&nbsp;1 &nbsp;<span class="text-body-secondary">&nbsp;Net Zero Target</span></h2>
+          <p class="lead" style="text-align: ledt;">In order to realize net zero target and combat climate change, all sectors of countries' economy should take decarbonization measures to reduce their carbon emissions.</p>
+        </div>
+      </div>
+    </div>
+    <div class="demo2 collapse" id="demo2" data-bs-parent="#accordion">
+      <div class="row featurette" style="color:black">
+        <div class="col-md-7">
+            <h2 class="featurette-heading fw-normal lh-1">Step&nbsp;2 &nbsp;<span class="text-body-secondary">&nbsp;Greenhouse Gases Protocol</span></h2>
+            <p class="lead">The GHG(Greenhouse Gases) Protocol has defined carbon emissions of an institution/company can be divided into scope 1, scope 2 and scope 3.</p>
+            <p class="lead">Scope 2 are emissions that a company causes indirectly and come from where the energy it purchases and uses is produced.</p>
+        </div>
+        <div class="col-md-5">
+            <img src="http://localhost:3000/images/GHG Protocol.jpg" alt="carbon" width="500">
+        </div>
+        </div>
+    </div>
+    <div class="demo3 collapse" id="demo3" data-bs-parent="#accordion">
+      <div class="row featurette" style="color:black">
+        <div class="col-md-7 order-md-2">
+          <h2 class="featurette-heading fw-normal lh-1">Step&nbsp;3 &nbsp;<span class="text-body-secondary">&nbsp;Expand Renewable Energy Proportion</span></h2>
+          <p class="lead">Electricity is generated by transforming other type of energy, for instance, coal and oil are used for power generation by a process that involves burning these fossil fuels to produce heat. This heat is then used to generate electricity.</p>
+          <p class="lead">Coal mining and oil power generation are traditional methods of electricity production, but they also come with environmental issues such as air pollution and greenhouse gas emissions. Therefore, more and more places are seeking to replace coal and oil with cleaner energy to reduce adverse environmental impacts, such as using renewable energy sources such as natural gas, solar energy, and wind energy for power generation.</p>
 
-         <br>
-         <div class="row featurette">
-         <div class="col-md-7">
-             <h2 class="featurette-heading fw-normal lh-1">Step&nbsp;2 &nbsp;<span class="text-body-secondary">&nbsp;Greenhouse Gases Protocol</span></h2>
-             <p class="lead">The GHG(Greenhouse Gases) Protocol has defined carbon emissions of an institution/company can be divided into scope 1, scope 2 and scope 3.</p>
-             <p class="lead">Scope 2 are emissions that a company causes indirectly and come from where the energy it purchases and uses is produced.</p>
-         </div>
-         <div class="col-md-5">
-             <img src="http://localhost:3000/images/GHG Protocol.jpg" alt="carbon" width="500">
-         </div>
-         </div>
-         <br>
-         <hr class="featurette-divider">
-
-
-         <br>
-         <div class="row featurette">
-             <div class="col-md-7 order-md-2">
-               <h2 class="featurette-heading fw-normal lh-1">Step&nbsp;3 &nbsp;<span class="text-body-secondary">&nbsp;Expand Renewable Energy Proportion</span></h2>
-               <p class="lead">Electricity is generated by transforming other type of energy, for instance, coal and oil are used for power generation by a process that involves burning these fossil fuels to produce heat. This heat is then used to generate electricity.</p>
-               <p class="lead">Coal mining and oil power generation are traditional methods of electricity production, but they also come with environmental issues such as air pollution and greenhouse gas emissions. Therefore, more and more places are seeking to replace coal and oil with cleaner energy to reduce adverse environmental impacts, such as using renewable energy sources such as natural gas, solar energy, and wind energy for power generation.</p>
- 
-             </div>
-             <div class="col-md-5 order-md-1">
-                 <img src="http://localhost:3000/images/renewable-energy.jpg" alt="carbon" width="500">
-             </div>
-           </div>
-         
-         <br>
-         <hr class="featurette-divider">
-
-
-         <br>
-        <div class="row featurette">
+        </div>
+        <div class="col-md-5 order-md-1">
+            <img src="http://localhost:3000/images/renewable-energy.jpg" alt="carbon" width="500">
+        </div>
+      </div>
+    </div>
+    <div class="demo4 collapse" id="demo4" data-bs-parent="#accordion">
+      <div class="row featurette" style="color:black">
         <div class="col-md-7">
             <h2 class="featurette-heading fw-normal lh-1">Step&nbsp;4 &nbsp;<span class="text-body-secondary">&nbsp;Carbon Intensity</span></h2>
             <p class="lead">•Carbon intensity is a measure of <span class="text-warning">how clean our electricity is</span>. It refers to how many grams of carbon dioxide (CO2) are released to produce a kilowatt hour (kWh) of electricity.</p>
@@ -144,46 +178,59 @@
             <img src="http://localhost:3000/images/carbon intensity.svg" alt="carbon" width="500">
         </div>
         </div>
-        <br>
-        <hr class="featurette-divider">
+    </div>
+    <div class="demo5 collapse" id="demo5" data-bs-parent="#accordion">
+      <div class="row featurette" style="color:black">
+        <div class="col-md-7 order-md-2">
+          <h2 class="featurette-heading fw-normal lh-1">Step&nbsp;5 &nbsp;<span class="text-body-secondary">&nbsp;Data Visualization Website</span></h2>
+          <p class="lead">Therefore, our team want to create this carbon intensity data visualization website for stakeholders to use to make wise decisions on each level.</p>
+            <p class="lead">For companies: Useful tool for corporate strategy directors to make wise decision on sustainability aspect, such as manufacture carbon-neutral products, build a zero-carbon factory and invest other corporations. Environmental-friendly products are more likely to be preferred by consumers with environmentally awareness, and brands with a sense of social responsibility that adopt environmental protection measures are more likely to win the hearts of market consumers.</p>
+            <br>
+            <p class="lead">For regional government: Issuing more decarbonization policies, allocate more funds to expand renewable energy's portion to decrease carbon intensity figure which could attract more companies to take root or invest subcompany in the region, thus, more job opportunities are created for locals and talents from the whole nation. Overall, not only can it reduce local carbon emissions, but it can also attract enterprises and talents to settle down, bringing about socio-economic development.</p>
+        </div>
+        <div class="col-md-5 order-md-1">
+            <img src="http://localhost:3000/images/UKmap.png" alt="carbon" width="400px">
+        </div>
+      </div>
+    </div>
+    </div>
+    <p style="color: rgb(16,97,151,1);text-align: end; margin:0">Click Step button to see more</p>
+  <hr class="featurette-divider">
+
+  <script>
+    $('.btn').click(function(){
+     
+      $('.demo .collapse').collapse('show');
+      console.log(1);
+    });
+    
+  </script>
 
 
-        <br>
-        <div class="row featurette">
-            <div class="col-md-7 order-md-2">
-              <h2 class="featurette-heading fw-normal lh-1">Step&nbsp;5 &nbsp;<span class="text-body-secondary">&nbsp;Data Visualization Website</span></h2>
-              <p class="lead">Therefore, our team want to create this carbon intensity data visualization website for stakeholders to use to make wise decisions on each level.</p>
-                <p class="lead">For companies: Useful tool for corporate strategy directors to make wise decision on sustainability aspect, such as manufacture carbon-neutral products, build a zero-carbon factory and invest other corporations. Environmental-friendly products are more likely to be preferred by consumers with environmentally awareness, and brands with a sense of social responsibility that adopt environmental protection measures are more likely to win the hearts of market consumers.</p>
-                <br>
-                <p class="lead">For regional government: Issuing more decarbonization policies, allocate more funds to expand renewable energy’s portion to decrease carbon intensity figure which could attract more companies to take root or invest subcompany in the region, thus, more job opportunities are created for locals and talents from the whole nation. Overall, not only can it reduce local carbon emissions, but it can also attract enterprises and talents to settle down, bringing about socio-economic development.</p>
-            </div>
-            <div class="col-md-5 order-md-1">
-                <img src="http://localhost:3000/images/UKmap.png" alt="carbon" width="500px">
-            </div>
-          </div>
-        <br>
-        <hr class="featurette-divider">
-
-
-        <h1>Who <strong class="text-warning">we</strong> are?</h1>
-        <div>&nbsp;</div>
-        <h2>UCL MSc Connected Environments – CASA 0017 Web Architecture</h2>
-        <h2 class="text-warning">Group 7 :&nbsp; [Chrome No.1]</h2>
+       
+  <h2 class=square id="introduction" style="margin-top: 50px;"><span style="height:10px;width:10px;background-color: rgb(24,160,251);">&nbsp;</span>&nbsp;&nbsp;Who <strong class="text-warning">we</strong> are?</h2>
+       
+        
+        <h3 style="font-size: 22px; margin-top: 50px;">&nbsp;&nbsp;&nbsp;&nbsp;UCL MSc Connected Environments - CASA 0017 Web Architecture</h3>
+        <h3 style="font-size: 22px; ">&nbsp;&nbsp;&nbsp;&nbsp;Group 7 :&nbsp; [Chrome No.1]</h3>
     
         <div style="text-align: center;">
         
-        <div>&nbsp;</div>
-        <img src="http://localhost:3000/images/Xin Cheng.jpg" alt="Xin Cheng" width="300px" style="text-align: center;">
-        <img src="http://localhost:3000/images/Satria.jpg" alt="Satria" width="300px" style="text-align: center; height: 457px;">
-        <img src="http://localhost:3000/images/Yikun Li.jpg" alt="Yikun Li" width="300px" style="text-align: center;">
-        <img src="http://localhost:3000/images/Haoming Wang.jpg" alt="Haoming Wang" width="300px" style="text-align: center;">
-        <div>&nbsp;</div>
+        <div style="display:flex;width:100%;justify-content: space-between;margin-top: 50px;">
+        <img src="http://localhost:3000/images/cx.png" alt="Xin Cheng" width="300px" style="text-align: center;">
+        <img src="http://localhost:3000/images/ss.png" alt="Satria" width="300px" style="text-align: center; height: 457px;">
+        <img src="http://localhost:3000/images/lyk.png" alt="Yikun Li" width="300px" style="text-align: center;">
+        <img src="http://localhost:3000/images/whm.png" alt="Haoming Wang" width="300px" style="text-align: center;">
+      </div>
         <hr class="featurette-divider">
 
       </div>
         </div>
         </div>
       </div>
-  </main>
+    </div>
+  </div>
+
+ 
 </body>
 </html>

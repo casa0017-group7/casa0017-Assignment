@@ -16,7 +16,7 @@ let nameFrom = null;
 
 async function initMap() {
   // The location of London
-  const position = { lat: 54.6819964, lng: -8 };
+  const position = { lat: 54.7558348, lng: -4.3257847 };
 
 
   const { Map } = await google.maps.importLibrary("maps");
@@ -26,11 +26,14 @@ async function initMap() {
   
   // The map, centered at UK
   map = new Map(document.getElementById("map-canvas"), {
-    zoom: 6.2,
+    zoom: 5.6,
     center: position,
     styles: carbon,
-    disableDefaultUI: true,
-    fullscreenControl: true
+    fullscreenControl: true,
+    scaleControl: true,
+    mapTypeControl: false,
+    streetViewControl: false,
+    draggable: false,
   });
 
   // Add events for google maps
@@ -38,6 +41,8 @@ async function initMap() {
   map.data.addListener("mouseover", hoverIn);
   map.data.addListener("mouseout", hoverOut);
   map.data.addListener('click', clickFeature);
+
+
 
   //Call function to load polygon boundaries
   loadPolygon();
@@ -101,7 +106,11 @@ function loadCarbonIndex(variable) {
               console.log(state.getProperty("carbonIndex"));
   
             }
-  
+            // update labels
+            document.getElementById("carbonmin").textContent =
+            carbonMin.toLocaleString();
+            document.getElementById("carbonmax").textContent =
+            carbonMax.toLocaleString();
           });
   
           //console.log("Region Data (regionid and shortname):", regionData);
@@ -119,8 +128,8 @@ function loadCarbonIndex(variable) {
 // Apply style for gradient color
 function setFeatureStyle(feature) {
   // Define the low and high colors
-  const lowColor = [216, 255, 211]; // RGB for low value
-  const highColor = [255, 100, 32];   // RGB for high value
+  const lowColor = [246,239,247]; // RGB for low value
+  const highColor = [2,129,138];   // RGB for high value
 
   // Access the carbonIndex from the feature properties
   const carbonIndex = feature.getProperty("carbonIndex");
@@ -156,6 +165,15 @@ function hoverIn(e) {
     e.feature.setProperty("state", "hover");
     console.log(e.feature.getProperty("state") + " at region " + e.feature.getProperty("name") + " with carbon index " + e.feature.getProperty("carbonIndex"));
 
+    const percent =
+    ((e.feature.getProperty("carbonIndex") - carbonMin) /
+      (carbonMax - carbonMin)) *
+    100;
+  
+    document.getElementById("data-caret").style.display = "block";
+    document.getElementById("data-caret").style.paddingLeft = percent + "%";
+
+
     //display tooltip
     var locationName = e.feature.getProperty('name');
     
@@ -173,6 +191,8 @@ function hoverIn(e) {
       
     }
     hoverFlag = true;
+
+
   }
 }
 

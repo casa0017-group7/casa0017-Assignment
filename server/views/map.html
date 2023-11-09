@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CarbonMap</title>
+  <title><%= title %></title>
 
   <!--icon-->
   <link rel="icon" type="image/x-icon" href="/images/icon-logo.png">
@@ -50,8 +50,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navmenu">
         <ul class="navbar nav ms-auto">
-          <li class="nav-item"><div class="nav-link text-white" type="button" onclick='location.href=("/map")'>map</div></li>
-          <li class="nav-item"><div class="nav-link text-white" type="button" onclick='location.href=("/resources")'>Resources</div></li>
+          <li class="nav-item"><div class="nav-link text-white" type="button" onclick='location.href=("/resources")'>Resourses</div></li>
           <li class="nav-item"><div class="nav-link text-white" type="button" onclick='location.href=("/about")'>About</div></li>
         </ul>
       </div>
@@ -85,8 +84,15 @@
     </div>
   </div>
 
-<div style="position:absolute; width: 100px; height: 300px; top:150px; right: 10px; background-color: #ffffff;z-index: 100;">
-  <p style="transform: rotate(90deg); transform-origin: left top 0;margin-left: 100px;">CarbonIntensity(gCO₂eq/kWh)</p>
+<div id="controls" class="container" style="position: absolute; width: 35%; height: 10%; bottom:30px; right: 70px; text-align: center; background-color: #ffffff;z-index: 100;">
+  <div>
+    <p style="margin: auto;">Carbon Intensity (g CO₂eq / kWh)</p>
+    <div id="legend">
+      <div id="carbonmin">min</div>
+      <div class="color-key"><span id="data-caret">&#10687;</span></div>
+      <div id="carbonmax">max</div>
+    </div>
+  </div>
 </div>
 
 <div id="region-info" ></div>
@@ -97,8 +103,7 @@
 
 
 
-<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
   <!--Jquery-->
   <script type='text/javascript' src='https://code.jquery.com/jquery-3.5.1.js'></script>

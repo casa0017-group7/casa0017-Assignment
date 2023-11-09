@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 var mapRouter = require('./routes/map');
 var resourcesRouter = require('./routes/resources');
 var aboutRouter = require('./routes/about');
+var errorRouter = require('./routes/error')
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/index', indexRouter);
 app.use('/map', mapRouter);
 app.use('/resources', resourcesRouter);
 app.use('/about', aboutRouter);
+app.use('*', errorRouter);
 
 
 

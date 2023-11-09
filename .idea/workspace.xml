@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f44e046a-b6eb-4b9b-91d0-db0af5452bfd" name="Changes" comment="the python script to get data from api and preprocess the data structure to generate sql statement" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2XomTVov1ezoC2hdz7OlC5DzS5B" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "back-end",
+    "last_opened_file_path": "D:/UCL/CASA0017/casa0017-Assignment",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Users\\cw\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\UCL\CASA0017\casa0017-Assignment" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f44e046a-b6eb-4b9b-91d0-db0af5452bfd" name="Changes" comment="" />
+      <created>1699303815856</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699303815856</updated>
+      <workItem from="1699303818015" duration="31859000" />
+    </task>
+    <task id="LOCAL-00001" summary="added route methods, some statements were changed to make the code more standardized">
+      <option name="closed" value="true" />
+      <created>1699381629397</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1699381629397</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added simple hover flag">
+      <option name="closed" value="true" />
+      <created>1699388696423</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1699388696423</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added simple mouse move event filter">
+      <option name="closed" value="true" />
+      <created>1699389634532</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1699389634532</updated>
+    </task>
+    <task id="LOCAL-00004" summary="improve the performance">
+      <option name="closed" value="true" />
+      <created>1699389966293</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1699389966293</updated>
+    </task>
+    <task id="LOCAL-00005" summary="improve the performance">
+      <option name="closed" value="true" />
+      <created>1699390344531</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1699390344531</updated>
+    </task>
+    <task id="LOCAL-00006" summary="improve the performance">
+      <option name="closed" value="true" />
+      <created>1699390413394</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1699390413394</updated>
+    </task>
+    <task id="LOCAL-00007" summary="first interface added">
+      <option name="closed" value="true" />
+      <created>1699406218028</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1699406218028</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added api doc">
+      <option name="closed" value="true" />
+      <created>1699414883056</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1699414883056</updated>
+    </task>
+    <task id="LOCAL-00009" summary="the python script to get data from api and preprocess the data structure to generate sql statement">
+      <option name="closed" value="true" />
+      <created>1699417462653</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1699417462653</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added route methods, some statements were changed to make the code more standardized" />
+    <MESSAGE value="added simple hover flag" />
+    <MESSAGE value="added simple mouse move event filter" />
+    <MESSAGE value="improve the performance" />
+    <MESSAGE value="first interface added" />
+    <MESSAGE value="added api doc" />
+    <MESSAGE value="the python script to get data from api and preprocess the data structure to generate sql statement" />
+    <option name="LAST_COMMIT_MESSAGE" value="the python script to get data from api and preprocess the data structure to generate sql statement" />
+  </component>
+</project>

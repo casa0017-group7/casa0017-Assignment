@@ -1,0 +1,19 @@
+Index: server/routes/map.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>var express = require('express');\r\nvar db = require(\"../sql.js\");\r\nvar router = express.Router();\r\n\r\n/* GET home page. */\r\nrouter.get('/', function(req, res, next) {\r\n    res.render('map', {title: 'CarbonMap'});\r\n});\r\n\r\n/**\r\n * @apiDefine respSuccessModel\r\n *\r\n * @apiSuccess {Object} code      api response code\r\n * @apiSuccess {Object} data      request data[not null]\r\n *\r\n */\r\n\r\n/**\r\n * @api {POST} /map/data get history carbon intensity data\r\n * @apiName getData\r\n * @apiGroup Data\r\n * @apiVersion 1.0.0\r\n * @apiHeader Content-Type application/json\r\n * @apiParam (Request body) {number} regionid the id of region\r\n * @apiParam (Request body) {String} shortname the short name of region\r\n * @apiParam (Request body) {String} date the date of carbon intensity record\r\n * @apiParam (Request body) {String} time the time of carbon intensity record\r\n * @apiParamExample {json} Request-Example\r\n *  {\r\n *     \"regionid\": 1,\r\n *     \"shortname\": \"North Scotland\",\r\n *     \"date\": \"2018-07-06\",\r\n *     \"time\": \"02:00:00\"\r\n * }\r\n *\r\n *\r\n * @apiUse respSuccessModel\r\n *\r\n * @apiSuccessExample  {json} Response-Example\r\n {\r\n    \"forecast\":\"268\",\r\n    \"data\":\"[\r\n        {\\\"fuel\\\": \\\"biomass\\\",\\\"perc\\\": 0},\r\n        {\\\"fuel\\\": \\\"coal\\\", \\\"perc\\\": 0},\r\n        {\\\"fuel\\\": \\\"imports\\\", \\\"perc\\\": 0},\r\n        {\\\"fuel\\\": \\\"gas\\\", \\\"perc\\\": 68.6},\r\n        {\\\"fuel\\\": \\\"nuclear\\\", \\\"perc\\\": 0},\r\n        {\\\"fuel\\\": \\\"other\\\", \\\"perc\\\": 0},\r\n        {\\\"fuel\\\": \\\"hydro\\\", \\\"perc\\\": 20.3},\r\n        {\\\"fuel\\\": \\\"solar\\\", \\\"perc\\\": 0},\r\n        {\\\"fuel\\\": \\\"wind\\\", \\\"perc\\\": 11.1}]\"}\r\n }\r\n *\r\n * @apiSampleRequest off\r\n */\r\nrouter.post('/data', function(req, res, next) {\r\n    var val = req.body;\r\n    var regionid = val.regionid;\r\n    var shortname = val.shortname;\r\n    var date = val.date;\r\n    var time = val.time;\r\n\r\n    console.log(val);\r\n    console.log(typeof(val));\r\n\r\n    db.query(\"select forecast, data from region where regionid = ? and shortname = ? and date = ? and time = ?\", [regionid, shortname, date, time], function(err, data){\r\n        if(err){\r\n            throw err;\r\n        }else if(data.length > 0){\r\n            res.end(JSON.stringify(data));\r\n        }\r\n    })\r\n});\r\n\r\nmodule.exports = router;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/server/routes/map.js b/server/routes/map.js
+--- a/server/routes/map.js	(revision cf461d748653ec02e458874ace4c0a789f9d78b6)
++++ b/server/routes/map.js	(date 1699463256193)
+@@ -65,7 +65,7 @@
+ 
+     db.query("select forecast, data from region where regionid = ? and shortname = ? and date = ? and time = ?", [regionid, shortname, date, time], function(err, data){
+         if(err){
+-            throw err;
++            // throw err;
+         }else if(data.length > 0){
+             res.end(JSON.stringify(data));
+         }

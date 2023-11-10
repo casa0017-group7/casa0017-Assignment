@@ -10,7 +10,6 @@ router.get('/', function(req, res, next) {
 /**
  * @apiDefine respSuccessModel
  *
- * @apiSuccess {Object} code      api response code
  * @apiSuccess {Object} data      request data[not null]
  *
  */
@@ -36,6 +35,8 @@ router.get('/', function(req, res, next) {
  *
  * @apiUse respSuccessModel
  *
+ * @apiSuccess {number} forecast the forecast value of next half hour
+ * @apiSuccess {json} data the combination of carbon intensity
  * @apiSuccessExample  {json} Response-Example
  {
     "forecast":"268",
@@ -65,7 +66,7 @@ router.post('/data', function(req, res, next) {
 
     db.query("select forecast, data from region where regionid = ? and shortname = ? and date = ? and time = ?", [regionid, shortname, date, time], function(err, data){
         if(err){
-            throw err;
+            throw(err);
         }else if(data.length > 0){
             res.end(JSON.stringify(data));
         }

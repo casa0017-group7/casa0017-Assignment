@@ -347,12 +347,11 @@ function drawPieChart(marker, map, data) {
   const contentString =
   '<div id="content">' +
   '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>' +
-  '<p>Info Time : '+ dateTime + '</p>' +
-  '<p>Valid for next 30 Minutes</p>' +
+  '<p>Info Time : '+ dateTime + '<br />'+
+  'Valid for next 30 Minutes</p>' +
   "</div>" +
   node.innerHTML +
   "</div>" +
-  '<div id="description">' + 
   '<p><a href="#">' +
   "Click here</a> For more Information</p>";
  

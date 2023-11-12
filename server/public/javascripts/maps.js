@@ -193,14 +193,11 @@ infowindow.setPosition(center);
 }
 
 function hoverOut(e) {
-  if (hoverFlag === true){
-    hoverFlag = false;
-    //reset the hover state
-    e.feature.setProperty("state", "normal");
-    map.data.revertStyle();
-    //hide tooltip
-    infowindow.close();
-    infowindow.opened = false;  }
+  //reset the hover state
+  e.feature.setProperty("state", "normal");
+  map.data.revertStyle();
+  //infowindow = new google.maps.InfoWindow();
+  infowindow.close();
 }
 
 var infoElement = document.getElementById('info');
@@ -268,4 +265,17 @@ function translateRegionName(geojsonName) {
   };
 
   return translations[geojsonName] || geojsonName;
+}
+
+function getCenterPolygon(feature) {
+  // Create an empty bounds object
+  var bounds = new google.maps.LatLngBounds();
+
+  // Loop through the coordinates of the feature's geometry
+  feature.getGeometry().forEachLatLng(function(LatLng) {
+    bounds.extend(LatLng);
+  });
+
+  // Return the center of the bounds
+  return bounds.getCenter();
 }

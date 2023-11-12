@@ -46,7 +46,7 @@ async function initMap() {
       strictBounds: false,
 
     },
-    zoom: 5.5,
+    zoom: 6,
     center: position,
     styles: carbon,
     fullscreenControl: true,
@@ -101,10 +101,11 @@ function loadCarbonIndex(variable) {
         //console.log(regions);
         if (regions) {
 
-            regions.forEach(region => {
-            //const regionid = region.regionid;
+          regions.forEach(region => {
+            const regionid = region.regionid;
             const name = region.shortname;
-            const currentTime = new Date(data.data[0].from);
+            const currentTime = new Date(data.data[0].from).toLocaleDateString();
+
             const toTime = region.to;
             const forecast = region.intensity.forecast;
             const translatedName = translateRegionName(name);
@@ -122,10 +123,11 @@ function loadCarbonIndex(variable) {
 
               
             state = map.data.getFeatureById(translatedName);
-            //console.log(state);
+            console.log(state);
   
             if (state !== undefined) {
               state.setProperty("carbonIndex", forecast);
+              state.setProperty("regionid", regionid);
               state.setProperty("name", translatedName);
               state.setProperty("currentTime", currentTime);
               state.setProperty("generationmix", generationmix);
@@ -201,7 +203,8 @@ function hoverIn(e) {
     const center = getCenterPolygon(e.feature);
     
   // Create and draw the Pie Chart
-
+  //infowindow = new google.maps.InfoWindow();
+  //infowindow.setContent(infoWindowed(center, map, e.feature));
   infowindow.setContent(drawPieChart(center, map, e.feature));
   infowindow.setPosition(center);
 
@@ -370,5 +373,44 @@ function drawPieChart(marker, map, data) {
     infowindow.open(map, marker);
 }
 
+function drawLineChart(data) {
+// Define the data to be sent in the request body
+const requestData = {
+  regionid: 1,
+  shortname: "North Scotland",
+  date: "2018-07-06",
+  time: "02:00:00",
+};
+
+// Convert the data to JSON format
+const jsonData = JSON.stringify(requestData);
+
+// Specify the URL for the POST request
+const url = "http://localhost:3000/map/data";
+
+// Make the POST request using fetch
+fetch(url, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json', // Specify the content type as JSON
+  },
+  body: jsonData, // Pass the JSON data as the request body
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Handle the response data
+    console.log(data);
+  })
+  .catch(error => {
+    // Handle errors during the request
+    console.error('Error:', error);
+  });
+  
+}
 
 

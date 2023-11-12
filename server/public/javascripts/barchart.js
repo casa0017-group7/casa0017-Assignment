@@ -1,26 +1,66 @@
-google.charts.load('current', {'packages':['bar']});
-google.charts.setOnLoadCallback(drawChart);
+$(document).ready(function () {
+  var id, shortname, formattedDate, formattedTime;
 
-function drawChart() {
-  var data = google.visualization.arrayToDataTable([
-    ['Year', 'Sales', 'Expenses', 'Profit'],
-    ['2014', 1000, 400, 200],
-    ['2015', 1170, 460, 250],
-    ['2016', 660, 1120, 300],
-    ['2017', 1030, 540, 350]
-  ]);
+  $("#dropdown").change(function(){
+    id = $(this).val();
+    shortname = $("#dropdown :selected").text();
+  });
+  $('#datetimepicker').datetimepicker({
 
-  var options = {
-    chart: {
-      title: 'Company Performance',
-      subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-    },
-    bars: 'horizontal' // Required for Material Bar Charts.
-  };
+    defaultDate:0,
+    step:30,
+    minDate:'2020/01/01',
+    maxDate:0,
+    maxTime:0  
+}).change(function(){
+    var startDate = $(this).val();
+    var dateObject = new Date(startDate);
+    formattedDate = dateObject.toISOString().split('T')[0];
+    formattedTime= dateObject.toLocaleTimeString('en-US', { hour12: false });
 
-  var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+    // console.log('Formatted Date:', formattedDate);
+    // console.log('Formatted Time:', formattedTime);
+  });
+  $("#submit").click(function () {
+    //console.log('ID:', id, 'Shortname:', shortname, 'date:', formattedDate, 'time:', formattedTime);
+    const requestData = {
+          regionid: id,
+          shortname: shortname,
+          date: formattedDate,
+          time: formattedTime
+    };
+    const jsonData = JSON.stringify(requestData);
+    console.log(jsonData);
+  
+    const url = "http://localhost:3000/map/data";
 
-  chart.draw(data, google.charts.Bar.convertOptions(options));
-}
+    // Make the POST request using fetch
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', 
+      },
+      body: jsonData,
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Handle the response data
+        console.log(data);
+      })
+      .catch(error => {
+        // Handle errors during the request
+        console.error('Error:', error);
+
+  });
+});
+})
+
+
+
 
 

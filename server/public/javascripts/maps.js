@@ -19,7 +19,7 @@ const { Data, Map, InfoWindow } = await google.maps.importLibrary("maps");
 
 
 google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(drawPieChart);
 
 async function initMap() {
   // The location of London
@@ -82,14 +82,11 @@ function loadPolygon () {
     { idPropertyName: "name"}, 
     function(features) {
       loadCarbonIndex(CarbonApiUrl);
- 
-    })
-
+     })
 };
 
 
 //* Loads carbon intensity from carbon intensity API
-
 function loadCarbonIndex(variable) {
   fetch(variable)
     .then(response => {
@@ -104,7 +101,10 @@ function loadCarbonIndex(variable) {
           regions.forEach(region => {
             const regionid = region.regionid;
             const name = region.shortname;
-            const currentTime = new Date(data.data[0].from).toLocaleDateString();
+            const time = new Date(data.data[0].from);
+            const date = time.toISOString().split('T')[0];
+            const curTime = formatTime(time);
+            console.log(curTime);
 
             const toTime = region.to;
             const forecast = region.intensity.forecast;
@@ -113,14 +113,12 @@ function loadCarbonIndex(variable) {
             //console.log(currentTime); 
             const generationmix = region.generationmix;
  
- 
-            if (forecast < carbonMin) {
+             if (forecast < carbonMin) {
               carbonMin = forecast;
             }
             if (forecast > carbonMax) {
               carbonMax = forecast;
             }
-
               
             state = map.data.getFeatureById(translatedName);
             console.log(state);
@@ -128,8 +126,10 @@ function loadCarbonIndex(variable) {
             if (state !== undefined) {
               state.setProperty("carbonIndex", forecast);
               state.setProperty("regionid", regionid);
-              state.setProperty("name", translatedName);
-              state.setProperty("currentTime", currentTime);
+              state.setProperty("name", name);
+              state.setProperty("translatedName", translatedName);
+              state.setProperty("date", date);
+              state.setProperty("curTime", curTime);
               state.setProperty("generationmix", generationmix);
                 
             }
@@ -184,12 +184,11 @@ function interpolateColor(color1, color2, factor) {
   return result;
 }
 
-
-
+//Effect when hover in
 function hoverIn(e) {
     // set the hover state
     e.feature.setProperty("state", "hover");
-    //console.log(e.feature.getProperty("state") + " at region " + e.feature.getProperty("name") + " with carbon index " + e.feature.getProperty("carbonIndex"));
+    //console.log(e.feature.getProperty("state") + " at region " + e.feature.getProperty("translatedName") + " with carbon index " + e.feature.getProperty("carbonIndex"));
 
     const percent =
     ((e.feature.getProperty("carbonIndex") - carbonMin) /
@@ -218,6 +217,8 @@ function hoverIn(e) {
 
   }
 
+
+// Hover out
 function hoverOut(e) {
     //reset the hover state
     e.feature.setProperty("state", "normal");
@@ -278,7 +279,7 @@ function clickFeature(e) {
   console.log(locationName);
 }
 
-
+//Translate region name from geojson to maps
 function translateRegionName(geojsonName) {
   const translations = {
     "North West England": "North West",
@@ -293,7 +294,7 @@ function translateRegionName(geojsonName) {
   return translations[geojsonName] || geojsonName;
 }
 
-
+// Get the center of polygon
 function getCenterPolygon(feature) {
   // Create an empty bounds object
   var bounds = new google.maps.LatLngBounds();
@@ -311,8 +312,8 @@ function getCenterPolygon(feature) {
 function drawPieChart(marker, map, data) {
   var generationMix = data.getProperty("generationmix");
   var name = data.getProperty("name");
-  var dateTime = data.getProperty("currentTime");
-
+  var dateTime = data.getProperty("curTime");
+console.log(dateTime);
   var data = new google.visualization.DataTable(generationMix);
   data.addColumn('string', 'Fuel');
   data.addColumn('number', 'Percent');
@@ -347,69 +348,36 @@ function drawPieChart(marker, map, data) {
   const contentString =
   '<div id="content">' +
   '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>' +
-  '<p>Info Time : '+ dateTime + '<br />'+
-  'Valid for next 30 Minutes</p>' +
-  "</div>" +
-  node.innerHTML +
-  "</div>" +
-  '<p><a href="#">' +
-  "Click here</a> For more Information</p>";
- 
- 
-  var parentDiv = document.createElement("div");
+  '<p>Info Time : '+ dateTime +' - Valid for next 30 Minutes</p><br />' +
+  '<p>Open Sidebar for more information</p>'
+  "</div>";
+
+
+
   var boxInfo = document.createElement("div");
   boxInfo.innerHTML = contentString;
-
+  boxInfo.appendChild(node);
   // Create a div element to hold the chart
 
   infowindow = new google.maps.InfoWindow();
 
-  parentDiv.appendChild(boxInfo);
-
+  
   infowindow = new google.maps.InfoWindow({
-    content: contentString
+    content: boxInfo
   });
     infowindow.open(map, marker);
 }
 
-function drawLineChart(data) {
-// Define the data to be sent in the request body
-const requestData = {
-  regionid: 1,
-  shortname: "North Scotland",
-  date: "2018-07-06",
-  time: "02:00:00",
-};
+//Format time to HH:MM:SS
+function formatTime(date) {
+  var dateObject = date;
 
-// Convert the data to JSON format
-const jsonData = JSON.stringify(requestData);
+  var hours = ('0' + dateObject.getHours()).slice(-2);
+  var minutes = ('0' + dateObject.getMinutes()).slice(-2);
+  var seconds = ('0' + dateObject.getSeconds()).slice(-2);
 
-// Specify the URL for the POST request
-const url = "http://localhost:3000/map/data";
+  var formattedTime = hours + ':' + minutes + ':' + seconds;
 
-// Make the POST request using fetch
-fetch(url, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json', // Specify the content type as JSON
-  },
-  body: jsonData, // Pass the JSON data as the request body
-})
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(data => {
-    // Handle the response data
-    console.log(data);
-  })
-  .catch(error => {
-    // Handle errors during the request
-    console.error('Error:', error);
-  });
-  
+  //console.log(formattedTime); // Output: "07:22:13"
+  return hours + ':' + minutes + ':' + seconds;
 }
-
-

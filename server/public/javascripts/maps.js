@@ -22,7 +22,7 @@ async function initMap() {
   const { Map } = await google.maps.importLibrary("maps");
   //const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-  document.body.appendChild(infoElement);
+  //document.body.appendChild(infoElement);
   
   // The map, centered at UK
   map = new Map(document.getElementById("map-canvas"), {
@@ -42,6 +42,8 @@ async function initMap() {
   map.data.addListener("mouseout", hoverOut);
   map.data.addListener('click', clickFeature);
 
+  const infowindow = new google.maps.InfoWindow();
+  infowindow.opened = false;
 
 
   //Call function to load polygon boundaries
@@ -75,36 +77,36 @@ function loadCarbonIndex(variable) {
         const regions = data.data[0].regions; // Assuming there's only one region in the response
         //console.log(regions);
         if (regions) {
-          const regionData = [];
-  
-          regions.forEach(region => {
+
+            regions.forEach(region => {
             //const regionid = region.regionid;
             const name = region.shortname;
+            const currentTime = new Date(data.data[0].from);
+            const toTime = region.to;
             const forecast = region.intensity.forecast;
             const translatedName = translateRegionName(name);
-            console.log(name);
-            console.log(translatedName); 
-  
-            //regionData.push(regionInfo);
-  
+            //console.log(name);
+            //console.log(currentTime); 
+            const generationmix = region.generationmix;
+ 
+ 
             if (forecast < carbonMin) {
               carbonMin = forecast;
             }
             if (forecast > carbonMax) {
               carbonMax = forecast;
             }
-            console.log(carbonMin);
-            console.log(carbonMax);
-  
+
+              
             state = map.data.getFeatureById(translatedName);
-            console.log(state);
+            //console.log(state);
   
             if (state !== undefined) {
               state.setProperty("carbonIndex", forecast);
               state.setProperty("name", translatedName);
-              console.log(state.getProperty("name"));
-              console.log(state.getProperty("carbonIndex"));
-  
+              state.setProperty("currentTime", currentTime);
+              state.setProperty("generationmix", generationmix);
+                
             }
             // update labels
             document.getElementById("carbonmin").textContent =
@@ -177,8 +179,10 @@ function hoverIn(e) {
     //display tooltip
     var locationName = e.feature.getProperty('name');
     
-    infoElement.innerHTML = locationName;
-    infoElement.style.display = 'block';
+    infowindow.setContent("tes");
+    infowindow.setPosition(bounds.getCenter());
+    infowindow.open(map);
+
     map.data.revertStyle();
     map.data.overrideStyle(e.feature, {
       strokeColor: "#ffffff", // white border
@@ -203,20 +207,11 @@ function hoverOut(e) {
     e.feature.setProperty("state", "normal");
     map.data.revertStyle();
     //hide tooltip
-    infoElement.style.display = 'none';
-  }
+    infowindow.close();
+    infowindow.opened = false;  }
 }
 
 var infoElement = document.getElementById('info');
-
-document.addEventListener('mousemove', function(e) {
-  var mouseX = e.clientX;
-  var mouseY = e.clientY;
-  
-  infoElement.style.left = mouseX + 5 + 'px';
-  infoElement.style.top = mouseY + 5 + 'px';
-});
-
 
 function clickFeature(e) {
     // get region name
@@ -230,6 +225,7 @@ function clickFeature(e) {
       return; 
     }
   }
+
 
   // add box to place region name
   var newInfoBox = document.createElement('div');

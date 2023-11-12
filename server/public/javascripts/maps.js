@@ -308,6 +308,7 @@ function getCenterPolygon(feature) {
 function drawPieChart(marker, map, data) {
   var generationMix = data.getProperty("generationmix");
   var name = data.getProperty("name");
+  var dateTime = data.getProperty("currentTime");
 
   var data = new google.visualization.DataTable(generationMix);
   data.addColumn('string', 'Fuel');
@@ -321,15 +322,13 @@ function drawPieChart(marker, map, data) {
   //console.log(data);
   // Set chart options
   var options = {
-    'title': 'Generation mix of ' + name,
     'chartArea': {
-      top: 40,
       width: '70%',
       height: '70%'
     },
-    'width': 400,
-    'height': 240,
-    'fontSize': 18,
+    'width': 430,
+    'height': 200,
+    'fontSize': 15,
     pieHole: 0.4,
     animation: {
       duration: 1000,
@@ -337,17 +336,38 @@ function drawPieChart(marker, map, data) {
     },
   };
 
-  
-
-  // Create a div element to hold the chart
   var node = document.createElement("div");
   var chart = new google.visualization.PieChart(node);
-  infowindow = new google.maps.InfoWindow();
-
   chart.draw(data, options);
 
-  infowindow.setContent(node);
-  infowindow.open(map, marker);
+
+  const contentString =
+  '<div id="content">' +
+  '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>' +
+  '<p>Info Time : '+ dateTime + '</p>' +
+  '<p>Valid for next 30 Minutes</p>' +
+  "</div>" +
+  node.innerHTML +
+  "</div>" +
+  '<div id="description">' + 
+  '<p><a href="#">' +
+  "Click here</a> For more Information</p>";
+ 
+ 
+  var parentDiv = document.createElement("div");
+  var boxInfo = document.createElement("div");
+  boxInfo.innerHTML = contentString;
+
+  // Create a div element to hold the chart
+
+  infowindow = new google.maps.InfoWindow();
+
+  parentDiv.appendChild(boxInfo);
+
+  infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+    infowindow.open(map, marker);
 }
 
 

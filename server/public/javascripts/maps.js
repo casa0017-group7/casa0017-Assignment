@@ -162,42 +162,34 @@ function interpolateColor(color1, color2, factor) {
 
 
 function hoverIn(e) {
-  if (hoverFlag === false){
-    // set the hover state
-    e.feature.setProperty("state", "hover");
-    console.log(e.feature.getProperty("state") + " at region " + e.feature.getProperty("name") + " with carbon index " + e.feature.getProperty("carbonIndex"));
+  // set the hover state
+  e.feature.setProperty("state", "hover");
+  //console.log(e.feature.getProperty("state") + " at region " + e.feature.getProperty("name") + " with carbon index " + e.feature.getProperty("carbonIndex"));
 
-    const percent =
-    ((e.feature.getProperty("carbonIndex") - carbonMin) /
-      (carbonMax - carbonMin)) *
-    100;
+  const percent =
+  ((e.feature.getProperty("carbonIndex") - carbonMin) /
+    (carbonMax - carbonMin)) *
+  100;
+
+  document.getElementById("data-caret").style.display = "block";
+  document.getElementById("data-caret").style.paddingLeft = percent + "%";
+
+  // Call the getCenterPolygon function
+  const center = getCenterPolygon(e.feature);
   
-    document.getElementById("data-caret").style.display = "block";
-    document.getElementById("data-caret").style.paddingLeft = percent + "%";
+// Create and draw the Pie Chart
 
+infowindow.setContent(drawPieChart(center, map, e.feature));
+infowindow.setPosition(center);
 
-    //display tooltip
-    var locationName = e.feature.getProperty('name');
-    
-    infowindow.setContent("tes");
-    infowindow.setPosition(bounds.getCenter());
-    infowindow.open(map);
+  
+  map.data.revertStyle();
+  map.data.overrideStyle(e.feature, {
+    strokeColor: "#ffffff", // white border
+    strokeWeight: 2.5,
+    zIndex: 2,
+  });
 
-    map.data.revertStyle();
-    map.data.overrideStyle(e.feature, {
-      strokeColor: "#ffffff", // white border
-      strokeWeight: 2.5,
-      zIndex: 2,
-    });
-    if(locationName != nameFrom){
-      nameFrom = locationName;
-      // update the styling of the feature
-      
-    }
-    hoverFlag = true;
-
-
-  }
 }
 
 function hoverOut(e) {

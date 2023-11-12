@@ -17,102 +17,128 @@
   <!--css-->
   <link rel='stylesheet' href='/stylesheets/style.css' type='text/css'/>
 
+  <!-- Jquery css -->
+  <link rel='stylesheet' href='/stylesheets/jquery.datetimepicker.css' type='text/css'/>
+
   <!--google charts-->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
   <!-- javascript file -->
   <script type="module" src="/javascripts/maps.js"></script>
   <script type="text/javascript" src="/javascripts/mapstyle.js"></script>
-  <script type="text/javascript" src="/javascripts/barchart.js"></script>
-  <script type="text/javascript" src="/javascripts/linechart.js"></script>
 
   
 
 </head>
 <body class="bg-dark" >
  
-<!--navbar on top-->
-  <nav class="navbar navbar-expand-lg bg-dark border-bottom border-white border-1 border-opacity-25" style="flex:2;z-index: 2;">
-    <div class="container-fluid mx-3 " >
-      <span data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" style="cursor:pointer;">
-      <span class="bi bi-list me-5" style="color:#ffffff;font-size: 25px;"></span>
-      </span>
-      <a href="#" class="navbar-brand text-white">
-        <img src="/images/logo.png" type="button" onclick='location.href=("/index")'>
-        </a>
-      <button 
-        class="navbar-toggler text-white" 
-        type="button" 
-        data-bs-toggle="collapse" 
-        data-bs-target="#navmenu"
-        >
-          <span class="bi bi-list"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navmenu">
-        <ul class="navbar nav ms-auto">
-          <li class="nav-item"><div class="nav-link text-white" type="button" onclick='location.href=("/resources")'>Resourses</div></li>
-          <li class="nav-item"><div class="nav-link text-white" type="button" onclick='location.href=("/about")'>About</div></li>
-        </ul>
+  <!--navbar on top-->
+    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-white border-1 border-opacity-25" style="flex:2;z-index: 2;">
+      <div class="container-fluid mx-3 " >
+        <span data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" style="cursor:pointer;">
+        <span class="bi bi-list me-5" style="color:#ffffff;font-size: 25px;"></span>
+        </span>
+        <a href="#" class="navbar-brand text-white">
+          <img src="./images/logo.png" type="button" onclick='location.href=("/index")'>
+          </a>
+        <button 
+          class="navbar-toggler text-white" 
+          type="button" 
+          data-bs-toggle="collapse" 
+          data-bs-target="#navmenu"
+          >
+            <span class="bi bi-list"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+          <ul class="navbar nav ms-auto">
+            <li class="nav-item"><div class="nav-link text-white" type="button" onclick='location.href=("/resources")'>Resourses</div></li>
+            <li class="nav-item"><div class="nav-link text-white" type="button" onclick='location.href=("/about")'>About</div></li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-
+    </nav>
   
-<!--sidebar for charts display-->
-  <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style="margin-top: 75px; background-color: rgb(255, 255, 255);z-index: 3; width:600px">
-    <div class="offcanvas-header">
-      <div>
-      <h3 class="offcanvas-title" id="offcanvasScrollingLabel" style="display: inline-block;">Carbon Intensity Data</h3>
-      <div type="button" onclick="window.print()" style="padding: 8px;display: inline-block;"><i class="bi bi-printer" style="width: 20px;"></i></div>
-      </div>
-      
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-     
-    </div>
-    <div class="offcanvas-body">
-      <h5 class="mb-3">Selected Region</h5>
-      <div>
+    
+  <!--sidebar for charts display-->
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style="margin-top: 75px; background-color: rgb(255, 255, 255);z-index: 3; width:600px">
+      <div class="offcanvas-header">
+        <div>
+        <h3 class="offcanvas-title" id="offcanvasScrollingLabel" style="display: inline-block;">Carbon Intensity Data</h3>
+        <div type="button" onclick="window.print()" style="padding: 8px;display: inline-block;"><i class="bi bi-printer" style="width: 20px;"></i></div>
+        </div>
         
-        <!--place region name when selected region-->
-        <div id="custom-container"></div>
-
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+       
       </div>
-      <h5 class="my-3">Energy type comparison for selected region</h5>
-      <div class="mb-5" id="barchart_material" style="width: 500px; height: 250px; z-index: 1;"></div>
-      <h5 class="mb-3">Carbon intensity history</h5>
-      <div id="curve_chart" style="width: 500px; height: 250px; z-index: 1;"></div>
+      <div class="offcanvas-body">
+  
+        <h5 class="mb-3">Select a Region</h5>
+        <select id="dropdown">
+          <option value="3">North West England</option>
+          <option value="4">North East England</option>
+          <option value="5">Yorkshire</option>
+          <option value="8">West Midlands</option>
+          <option value="9">East Midlands</option>
+          <option value="10">East England</option>
+          <option value="11">South West England</option>
+          <option value="13">London</option>
+          <option value="14">South East England</option>
+          <option value="16">Scotland</option>
+          <option value="17">Wales</option>
+        </select>
+        <input id="datetimepicker" type="text" >
+        <button type="button" class="btn btn-light" id="submit">Light</button>
+  
+          
+          <!--place region name when selected region-->
+          <div id="custom-container"></div>
+  
+        </div>
+        <h5 class="my-3">Energy type comparison for selected region</h5>
+        <div class="mb-5" id="barchart_material" style="width: 500px; height: 250px; z-index: 1;"></div>
+        <h5 class="mb-3">Carbon intensity history</h5>
+        <div id="curve_chart" style="width: 500px; height: 250px; z-index: 1;"></div>
+      </div>
+    </div>
+  
+  <div id="controls" class="container" style="position: absolute; width: 35%; height: 10%; bottom:30px; right: 70px; text-align: center; background-color: #ffffff;z-index: 100;">
+    <div>
+      <p style="margin: auto;">Carbon Intensity (g CO₂eq / kWh)</p>
+      <div id="legend">
+        <div id="carbonmin">min</div>
+        <div class="color-key"><span id="data-caret">&#10687;</span></div>
+        <div id="carbonmax">max</div>
+      </div>
     </div>
   </div>
-
-<div id="controls" class="container" style="position: absolute; width: 35%; height: 10%; bottom:30px; right: 70px; text-align: center; background-color: #ffffff;z-index: 100;">
-  <div>
-    <p style="margin: auto;">Carbon Intensity (g CO₂eq / kWh)</p>
-    <div id="legend">
-      <div id="carbonmin">min</div>
-      <div class="color-key"><span id="data-caret">&#10687;</span></div>
-      <div id="carbonmax">max</div>
-    </div>
+  
+  <div id="region-info" ></div>
+  <div id="info" ></div>
+  <!--map display-->
+    <div id="map-canvas" style="position: relative; ">
   </div>
-</div>
+  
+  
+  
+  
+  
+    <!--Jquery-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./javascripts/jquery.js"></script>
 
-<div id="region-info" ></div>
-<div id="info" ></div>
-<!--map display-->
-  <div id="map-canvas" style="position: relative; ">
-</div>
+    <!-- jquery datetime -->
+    <script type="text/javascript" src="./javascripts/jquery.datetimepicker.full.min.js"></script>
 
 
-
-
-
-  <!--Jquery-->
-  <script type='text/javascript' src='https://code.jquery.com/jquery-3.5.1.js'></script>
-  <!--bootstrap.js-->
+    <!--bootstrap.js-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <!-- Load google maps API -->
   <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
     ({key: "AIzaSyCerOaQBfdb1V7FCd9Qgk_oi9kMGAqWjfA", v: "weekly"});</script>
     <script type="module" src="/javascripts/maps.js"></script>
+
+    <!-- barchart -->
+    <script type="text/javascript" src="./javascripts/barchart.js"></script>
 
   </body>
 </html>

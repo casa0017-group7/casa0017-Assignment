@@ -1,5 +1,6 @@
 let map;
 
+
 let carbonData = [];
 var state = [];
 let carbonMin = Number.MAX_VALUE,
@@ -8,33 +9,55 @@ let carbonMin = Number.MAX_VALUE,
 var regioninuk = "./resources/UK.geojson"
 var CarbonApiUrl = "https://api.carbonintensity.org.uk/regional";
 
-
-
 let hoverFlag = false;
 let nameFrom = null;
 
+let regionData = [];
+
+let infowindow;
+const { Data, Map, InfoWindow } = await google.maps.importLibrary("maps");
+
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
 
 async function initMap() {
   // The location of London
-  const position = { lat: 54.7558348, lng: -4.3257847 };
+  const position = { lat: 54.55, lng: -4.35 };
 
 
-  const { Map } = await google.maps.importLibrary("maps");
+  const { Data, Map, InfoWindow } = await google.maps.importLibrary("maps");
+  const {LatLngBounds, LatLng} = await google.maps.importLibrary("core")
   //const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
   //document.body.appendChild(infoElement);
   
+  var GreatBritain = {
+    north: 62.55,
+    south: 41.55,
+    west: -14.35,
+    east: 6.35,
+  };
+
   // The map, centered at UK
-  map = new Map(document.getElementById("map-canvas"), {
-    zoom: 5.6,
+  map = new google.maps.Map(document.getElementById("map-canvas"), {
+    restriction: {
+      latLngBounds: GreatBritain,
+      strictBounds: false,
+
+    },
+    zoom: 6,
     center: position,
     styles: carbon,
     fullscreenControl: true,
     scaleControl: true,
     mapTypeControl: false,
     streetViewControl: false,
-    draggable: false,
+
   });
+
+  infowindow = new google.maps.InfoWindow({maxWidth: 600});
+
 
   // Add events for google maps
   map.data.setStyle(setFeatureStyle);
@@ -42,12 +65,10 @@ async function initMap() {
   map.data.addListener("mouseout", hoverOut);
   map.data.addListener('click', clickFeature);
 
-  const infowindow = new google.maps.InfoWindow();
-  infowindow.opened = false;
-
 
   //Call function to load polygon boundaries
   loadPolygon();
+
 
 }
 initMap();
@@ -57,11 +78,13 @@ initMap();
 //Load the boundaries polygon from Geojson files
 function loadPolygon () {
   // Load Geojson files
-  map.data.loadGeoJson(regioninuk, 
+  var mapps = map.data.loadGeoJson(regioninuk, 
     { idPropertyName: "name"}, 
     function(features) {
       loadCarbonIndex(CarbonApiUrl);
-    });
+ 
+    })
+
 };
 
 
@@ -162,42 +185,42 @@ function interpolateColor(color1, color2, factor) {
 
 
 function hoverIn(e) {
-  // set the hover state
-  e.feature.setProperty("state", "hover");
-  //console.log(e.feature.getProperty("state") + " at region " + e.feature.getProperty("name") + " with carbon index " + e.feature.getProperty("carbonIndex"));
+    // set the hover state
+    e.feature.setProperty("state", "hover");
+    //console.log(e.feature.getProperty("state") + " at region " + e.feature.getProperty("name") + " with carbon index " + e.feature.getProperty("carbonIndex"));
 
-  const percent =
-  ((e.feature.getProperty("carbonIndex") - carbonMin) /
-    (carbonMax - carbonMin)) *
-  100;
-
-  document.getElementById("data-caret").style.display = "block";
-  document.getElementById("data-caret").style.paddingLeft = percent + "%";
-
-  // Call the getCenterPolygon function
-  const center = getCenterPolygon(e.feature);
+    const percent =
+    ((e.feature.getProperty("carbonIndex") - carbonMin) /
+      (carbonMax - carbonMin)) *
+    100;
   
-// Create and draw the Pie Chart
+    document.getElementById("data-caret").style.display = "block";
+    document.getElementById("data-caret").style.paddingLeft = percent + "%";
 
-infowindow.setContent(drawPieChart(center, map, e.feature));
-infowindow.setPosition(center);
+    // Call the getCenterPolygon function
+    const center = getCenterPolygon(e.feature);
+    
+  // Create and draw the Pie Chart
 
-  
-  map.data.revertStyle();
-  map.data.overrideStyle(e.feature, {
-    strokeColor: "#ffffff", // white border
-    strokeWeight: 2.5,
-    zIndex: 2,
-  });
+  infowindow.setContent(drawPieChart(center, map, e.feature));
+  infowindow.setPosition(center);
 
-}
+    
+    map.data.revertStyle();
+    map.data.overrideStyle(e.feature, {
+      strokeColor: "#ffffff", // white border
+      strokeWeight: 2.5,
+      zIndex: 2,
+    });
+
+  }
 
 function hoverOut(e) {
-  //reset the hover state
-  e.feature.setProperty("state", "normal");
-  map.data.revertStyle();
-  //infowindow = new google.maps.InfoWindow();
-  infowindow.close();
+    //reset the hover state
+    e.feature.setProperty("state", "normal");
+    map.data.revertStyle();
+    //infowindow = new google.maps.InfoWindow();
+    infowindow.close();
 }
 
 var infoElement = document.getElementById('info');
@@ -267,6 +290,7 @@ function translateRegionName(geojsonName) {
   return translations[geojsonName] || geojsonName;
 }
 
+
 function getCenterPolygon(feature) {
   // Create an empty bounds object
   var bounds = new google.maps.LatLngBounds();
@@ -325,3 +349,6 @@ function drawPieChart(marker, map, data) {
   infowindow.setContent(node);
   infowindow.open(map, marker);
 }
+
+
+

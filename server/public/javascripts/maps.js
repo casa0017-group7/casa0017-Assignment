@@ -279,3 +279,49 @@ function getCenterPolygon(feature) {
   // Return the center of the bounds
   return bounds.getCenter();
 }
+
+//Draw Pie Chart
+function drawPieChart(marker, map, data) {
+  var generationMix = data.getProperty("generationmix");
+  var name = data.getProperty("name");
+
+  var data = new google.visualization.DataTable(generationMix);
+  data.addColumn('string', 'Fuel');
+  data.addColumn('number', 'Percent');
+
+  // Add data rows to the DataTable
+  for (var i = 0; i < generationMix.length; i++) {
+    data.addRow([generationMix[i].fuel, generationMix[i].perc]);
+  }
+
+  //console.log(data);
+  // Set chart options
+  var options = {
+    'title': name,
+    'chartArea': {
+      top: 40,
+      width: '80%',
+      height: '80%'
+    },
+    'width': 450,
+    'height': 280,
+    'fontSize': 20,
+    pieHole: 0.4,
+    animation: {
+      duration: 1000,
+      easing: 'out',
+    },
+  };
+
+  
+
+  // Create a div element to hold the chart
+  var node = document.createElement("div");
+  var chart = new google.visualization.PieChart(node);
+  infowindow = new google.maps.InfoWindow();
+
+  chart.draw(data, options);
+
+  infowindow.setContent(node);
+  infowindow.open(map, marker);
+}

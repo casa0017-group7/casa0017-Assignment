@@ -1,5 +1,6 @@
 $(document).ready(function () {
   var id, shortname, formattedDate, formattedTime;
+  var dataArray;
 
   $("#dropdown").change(function(){
     id = $(this).val();
@@ -30,7 +31,7 @@ $(document).ready(function () {
           time: formattedTime
     };
     const jsonData = JSON.stringify(requestData);
-    console.log(jsonData);
+    console.log(requestData);
   
     const url = "http://localhost:3000/map/data";
 
@@ -50,7 +51,10 @@ $(document).ready(function () {
       })
       .then(data => {
         // Handle the response data
-        console.log(data);
+        //console.log(data);
+      dataArray = JSON.parse(data[0].data);  
+      console.log(dataArray);
+      drawBarChart(dataArray);
       })
       .catch(error => {
         // Handle errors during the request
@@ -59,7 +63,35 @@ $(document).ready(function () {
   });
 });
 })
+google.charts.load('current', {'packages':['bar']});
+google.charts.setOnLoadCallback(drawBarChart);
 
+function drawBarChart(data) {
+  var chartData = data;
+  var dataTable = new google.visualization.DataTable(chartData);
+  dataTable.addColumn('string', 'Fuel');
+  dataTable.addColumn('number', 'Percent');
+
+  for (var i = 0; i < chartData.length; i++) {
+    dataTable.addRow([chartData[i].fuel, chartData[i].perc]);
+  }
+  var options = {
+    title: 'Fuel Percentage',
+    chartArea: { width: '50%' },
+    hAxis: {
+      title: 'Percentage',
+      minValue: 0,
+      maxValue: 100
+    },
+    vAxis: {
+      title: 'Fuel'
+    }
+  };
+
+  var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+  chart.draw(dataTable, google.charts.Bar.convertOptions(options));
+  //console.log(chart);
+}
 
 
 

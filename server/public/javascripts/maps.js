@@ -46,7 +46,7 @@ async function initMap() {
       strictBounds: false,
 
     },
-    zoom: 6,
+    zoom: 5.5,
     center: position,
     styles: carbon,
     fullscreenControl: true,
@@ -321,15 +321,15 @@ function drawPieChart(marker, map, data) {
   //console.log(data);
   // Set chart options
   var options = {
-    'title': name,
+    'title': 'Generation mix of ' + name,
     'chartArea': {
       top: 40,
-      width: '80%',
-      height: '80%'
+      width: '70%',
+      height: '70%'
     },
-    'width': 450,
-    'height': 280,
-    'fontSize': 20,
+    'width': 400,
+    'height': 240,
+    'fontSize': 18,
     pieHole: 0.4,
     animation: {
       duration: 1000,

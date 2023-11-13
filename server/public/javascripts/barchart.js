@@ -55,15 +55,14 @@ google.charts.load('current', { 'packages': ['bar'] });
 google.charts.setOnLoadCallback(drawBarChart);
 
 function drawBarChart(data) {
-  // 检查数据是否为空
+  // check wether data is empty
   if (!data || data.length === 0) {
-    // 如果数据为空，创建一个空的数据表
+    // if empty data, set empty bar
     var emptyDataTable = new google.visualization.DataTable();
     emptyDataTable.addColumn('string', 'Fuel');
     emptyDataTable.addColumn('number', 'Percent');
-    emptyDataTable.addRow(['', 0]); // 添加一个初始的空数据行
-
-    // 创建一个空白的图表
+    emptyDataTable.addRow(['', 0]); 
+    // set empty bar
     var options = {
       title: 'Fuel Percentage',
       chartArea: { width: '50%' },
@@ -80,7 +79,7 @@ function drawBarChart(data) {
     var emptyChart = new google.charts.Bar(document.getElementById('barchart_material'));
     emptyChart.draw(emptyDataTable, google.charts.Bar.convertOptions(options));
   } else {
-    // 如果数据不为空，绘制正常的图表
+    // if not empty data, work
     var dataTable = new google.visualization.DataTable(data);
     dataTable.addColumn('string', 'Fuel');
     dataTable.addColumn('number', 'Percent');

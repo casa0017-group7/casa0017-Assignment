@@ -47,10 +47,11 @@
           data-bs-toggle="collapse" 
           data-bs-target="#navmenu"
           >
-            <span class="bi bi-clock-history"></span>
+            <span class="bi bi-list"></span>
         </button>
         <div class="collapse navbar-collapse" id="navmenu">
           <ul class="navbar nav ms-auto">
+            <li class="nav-item"><div class="nav-link text-white" type="button" onclick='location.href=("/map")'>Map</div></li>
             <li class="nav-item"><div class="nav-link text-white" type="button" onclick='location.href=("/resources")'>Resources</div></li>
             <li class="nav-item"><div class="nav-link text-white" type="button" onclick='location.href=("/about")'>About</div></li>
           </ul>
@@ -72,7 +73,7 @@
       </div>
       <div class="offcanvas-body">
   
-        <h5 class="mb-3">Select a Region and Date Time</h5>
+        <h5 class="mb-3" style="margin-top: 30px;"><span style="height:10px;width:10px;background-color: rgb(24,160,251);">&nbsp;</span> &nbsp;&nbsp;Select a Region and Date Time</h5>
         <p class="my-3">Due to limit database, we only display data between <strong>2020-2022</strong>, please select in this time range</p>
         <select id="dropdown">
           <option value="3">North West England</option>
@@ -92,14 +93,14 @@
   
           
           <!--place region name when selected region-->
-          <div id="custom-container"></div>
+         
   
        
-        <h5 class="my-3">Energy type percentage</h5>
+        <h5 style="margin-top: 50px;" ><span style="height:10px;width:10px;background-color: rgb(24,160,251);">&nbsp;</span> &nbsp;&nbsp;Energy type percentage</h5>
         
         <div class="mb-5" id="barchart_material" style="width: 500px; height: 250px; z-index: 1;"></div>
-        <h5 class="mb-3"></h5>
-        <div id="curve_chart" style="width: 500px; height: 250px; z-index: 1;"></div>
+        
+        <div id="line-chart-container" style="width: 500px; height: 250px; z-index: 1;"></div>
       </div>
     </div>
    </div>

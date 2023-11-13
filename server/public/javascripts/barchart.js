@@ -31,7 +31,7 @@ $(document).ready(function () {
           time: formattedTime
     };
     const jsonData = JSON.stringify(requestData);
-    console.log(requestData);
+    //console.log(requestData);
   
     const url = "http://localhost:3000/map/data";
 
@@ -53,7 +53,7 @@ $(document).ready(function () {
         // Handle the response data
         //console.log(data);
       dataArray = JSON.parse(data[0].data);  
-      console.log(dataArray);
+      //console.log(dataArray);
       drawBarChart(dataArray);
       })
       .catch(error => {

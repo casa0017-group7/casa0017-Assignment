@@ -1,3 +1,4 @@
+//Define global var
 let map;
 
 
@@ -15,12 +16,12 @@ let nameFrom = null;
 let regionData = [];
 
 let infowindow;
-const { Data, Map, InfoWindow } = await google.maps.importLibrary("maps");
 
-
+// Call the package of google chart
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawPieChart);
 
+//Init main function
 async function initMap() {
   // The location of London
   const position = { lat: 54.55, lng: -4.35 };
@@ -28,10 +29,8 @@ async function initMap() {
 
   const { Data, Map, InfoWindow } = await google.maps.importLibrary("maps");
   const {LatLngBounds, LatLng} = await google.maps.importLibrary("core")
-  //const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
-  //document.body.appendChild(infoElement);
   
+  // Set boundaries of maps
   var GreatBritain = {
     north: 62.55,
     south: 41.55,
@@ -86,7 +85,7 @@ function loadPolygon () {
 };
 
 
-//* Loads carbon intensity from carbon intensity API
+// Loads carbon intensity from carbon intensity API
 function loadCarbonIndex(variable) {
   fetch(variable)
     .then(response => {
@@ -94,7 +93,7 @@ function loadCarbonIndex(variable) {
     })
     .then(data => {
       if (data && data.data) {
-        const regions = data.data[0].regions; // Assuming there's only one region in the response
+        const regions = data.data[0].regions; 
         //console.log(regions);
         if (regions) {
 
@@ -104,7 +103,7 @@ function loadCarbonIndex(variable) {
             const time = new Date(data.data[0].from);
             const date = time.toISOString().split('T')[0];
             const curTime = formatTime(time);
-            console.log(curTime);
+            //console.log(curTime);
 
             const toTime = region.to;
             const forecast = region.intensity.forecast;
@@ -121,8 +120,9 @@ function loadCarbonIndex(variable) {
             }
               
             state = map.data.getFeatureById(translatedName);
-            console.log(state);
+            //console.log(state);
   
+            // set property of each var to state
             if (state !== undefined) {
               state.setProperty("carbonIndex", forecast);
               state.setProperty("regionid", regionid);
@@ -279,7 +279,7 @@ function clickFeature(e) {
   console.log(locationName);
 }
 
-//Translate region name from geojson to maps
+//Translate region name from geojson to match API regio name
 function translateRegionName(geojsonName) {
   const translations = {
     "North West England": "North West",
@@ -313,7 +313,7 @@ function drawPieChart(marker, map, data) {
   var generationMix = data.getProperty("generationmix");
   var name = data.getProperty("name");
   var dateTime = data.getProperty("curTime");
-console.log(dateTime);
+//console.log(dateTime);
   var data = new google.visualization.DataTable(generationMix);
   data.addColumn('string', 'Fuel');
   data.addColumn('number', 'Percent');
@@ -344,7 +344,7 @@ console.log(dateTime);
   var chart = new google.visualization.PieChart(node);
   chart.draw(data, options);
 
-
+// Set the content of info window
   const contentString =
   '<div id="content">' +
   '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>' +
@@ -353,15 +353,15 @@ console.log(dateTime);
   "</div>";
 
 
-
+  // Create DIV element of infowindow
   var boxInfo = document.createElement("div");
   boxInfo.innerHTML = contentString;
+
+  // Combine node Div into BoxInfo Div
   boxInfo.appendChild(node);
-  // Create a div element to hold the chart
 
-  infowindow = new google.maps.InfoWindow();
 
-  
+  // Set the content of infowindow from BoxInfo Div
   infowindow = new google.maps.InfoWindow({
     content: boxInfo
   });
@@ -378,6 +378,6 @@ function formatTime(date) {
 
   var formattedTime = hours + ':' + minutes + ':' + seconds;
 
-  //console.log(formattedTime); // Output: "07:22:13"
+  //console.log(formattedTime);
   return hours + ':' + minutes + ':' + seconds;
 }

@@ -36,7 +36,7 @@
     <nav class="navbar navbar-expand-lg bg-dark border-bottom border-white border-1 border-opacity-25" style="flex:2;z-index: 2;">
       <div class="container-fluid mx-3 " >
         <span data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" style="cursor:pointer;">
-        <span class="bi bi-list me-5" style="color:#ffffff;font-size: 25px;"></span>
+        <span class="bi bi-clock-history me-5" style="color:#ffffff;font-size: 25px;"></span>
         </span>
         <a href="#" class="navbar-brand text-white">
           <img src="./images/logo.png" type="button" onclick='location.href=("/index")'>
@@ -47,7 +47,7 @@
           data-bs-toggle="collapse" 
           data-bs-target="#navmenu"
           >
-            <span class="bi bi-list"></span>
+            <span class="bi bi-clock-history"></span>
         </button>
         <div class="collapse navbar-collapse" id="navmenu">
           <ul class="navbar nav ms-auto">
@@ -63,7 +63,7 @@
     <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style="margin-top: 75px; background-color: rgb(255, 255, 255);z-index: 3; width:600px">
       <div class="offcanvas-header">
         <div>
-        <h3 class="offcanvas-title" id="offcanvasScrollingLabel" style="display: inline-block;">Carbon Intensity Data</h3>
+        <h3 class="offcanvas-title" id="offcanvasScrollingLabel" style="display: inline-block;">Carbon Intensity History Data</h3>
         <div type="button" onclick="window.print()" style="padding: 8px;display: inline-block;"><i class="bi bi-printer" style="width: 20px;"></i></div>
         </div>
         
@@ -73,6 +73,7 @@
       <div class="offcanvas-body">
   
         <h5 class="mb-3">Select a Region and Date Time</h5>
+        <p class="my-3">Due to limit database, we only display data between <strong>2020-2022</strong>, please select in this time range</p>
         <select id="dropdown">
           <option value="3">North West England</option>
           <option value="4">North East England</option>
@@ -87,20 +88,21 @@
           <option value="17">Wales</option>
         </select>
         <input id="datetimepicker" type="text" >
-        <button type="button" class="btn btn-light" id="submit">Light</button>
+        <button type="button" class="btn btn-light" id="submit">Apply</button>
   
           
           <!--place region name when selected region-->
           <div id="custom-container"></div>
   
-        </div>
-        <h5 class="my-3">Energy type comparison for selected region</h5>
+       
+        <h5 class="my-3">Energy type percentage</h5>
+        
         <div class="mb-5" id="barchart_material" style="width: 500px; height: 250px; z-index: 1;"></div>
         <h5 class="mb-3"></h5>
         <div id="curve_chart" style="width: 500px; height: 250px; z-index: 1;"></div>
       </div>
     </div>
-  
+   </div>
   <div id="controls" class="container" style="position: absolute; width: 35%; height: 10%; bottom:30px; right: 70px; text-align: center; background-color: #ffffff;z-index: 100;">
     <div>
       <p style="margin: auto;">Carbon Intensity (g CO₂eq / kWh)</p>

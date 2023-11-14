@@ -149,7 +149,7 @@ You can find apidoc after deploy at http://localhost:8898/apidoc
 
 <b>1. Error: Cannot find module '../secrets.js' </b>
 
-Files to store the database host, user name, and password are missing
+Files to store the database host, user name, and password is missing
 
 <b>2. Error: Cannot find module 'mysql' </b>
 

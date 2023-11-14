@@ -11,7 +11,6 @@ $(document).ready(function () {
     step: 30,
     minDate: '2020/01/01',
     maxDate: 0,
-    maxTime: 0
   }).change(function () {
     var startDate = $(this).val();
     var dateObject = new Date(startDate);

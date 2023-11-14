@@ -98,11 +98,6 @@ This section provides an analysis of the JavaScript and CSS used in the provided
 ## ------ insert here for other code -------
 
 
-## Conclusion
-
-The HTML page incorporates several external libraries and custom scripts to enable specific functionalities, such as Google Charts, Bootstrap components, jQuery, and Google Maps API integration. Additionally, custom styles are applied using external stylesheets. 
-
-
 ## Additional Features
 
 - **Date and Region Selection:** Users can select specific dates and regions to view historical carbon intensity data.

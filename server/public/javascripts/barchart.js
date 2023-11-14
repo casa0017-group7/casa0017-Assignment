@@ -25,7 +25,7 @@ $(document).ready(function () {
       time: formattedTime
     };
     const jsonData = JSON.stringify(requestData);
-    const url = "http://localhost:3000/map/data";
+    const url = "http://casa0017.cetools.org:8898/map/data";
 
     fetch(url, {
       method: 'POST',

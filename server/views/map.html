@@ -75,7 +75,8 @@
   
         <h5 class="mb-3" style="margin-top: 30px;"><span style="height:10px;width:10px;background-color: rgb(24,160,251);">&nbsp;</span> &nbsp;&nbsp;Select a Region and Date Time</h5>
         <p class="my-3">Due to limit database, we only display data between <strong>2020-2022</strong>, please select in this time range</p>
-        <select id="dropdown">
+        <select id="dropdown" value="0">
+          <option value="0">-- please select --</option>
           <option value="3">North West England</option>
           <option value="4">North East England</option>
           <option value="5">Yorkshire</option>
@@ -88,7 +89,7 @@
           <option value="16">Scotland</option>
           <option value="17">Wales</option>
         </select>
-        <input id="datetimepicker" type="text" >
+        <input id="datetimepicker" type="text" placeholder="please select date and time">
         <button type="button" class="btn btn-light" id="submit">Apply</button>
   
           

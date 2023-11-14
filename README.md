@@ -24,13 +24,13 @@
 ```
 └─server 					Project main folder
     ├─bin					Project startup file/entry
-    ├─node_modules			Project dependency
+    ├─node_modules		Project dependency
     ├─public				Static resource directory
-    │  ├─apidoc					Apidoc directory
-    │  ├─images					Image directory
-    │  ├─javascripts			Javascript directory
-    │  ├─resources				Other resources
-    │  └─stylesheets			css files directory
+    │  ├─apidoc			Apidoc directory
+    │  ├─images			Image directory
+    │  ├─javascripts		Javascript directory
+    │  ├─resources		Other resources
+    │  └─stylesheets		css files directory
     ├─routes				Web routing configuration file
     └─views					Html files directory
 ```

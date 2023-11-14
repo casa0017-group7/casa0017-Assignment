@@ -244,21 +244,6 @@ var darkMap = [
   }
 ];
 
-var carbon = 
-[
-    {
-      stylers: [{ visibility: "off" }],
-    },
-    {
-      featureType: "landscape",
-      elementType: "geometry",
-      stylers: [{ visibility: "on" }, { color: "#006076" }],
-    },
-    {
-      featureType: "water",
-      elementType: "geometry",
-      stylers: [{ visibility: "on" }, { color: "#D3D3D3" }],
-    },
-  ];
+
 
   

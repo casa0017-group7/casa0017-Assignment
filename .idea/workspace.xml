@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c96b3cf-d4ac-4554-8829-56e142460445" name="Changes" comment="404 auto direct added">
-      <change beforePath="$PROJECT_DIR$/server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/map.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/public/javascripts/mapStyle.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/public/javascripts/mapStyle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/public/javascripts/maps.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/public/javascripts/maps.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,15 +21,38 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2YAzSTVnFH2Mu6f0zbw8zZnPCQh" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "back-end",
-    "javascript.nodejs.core.library.configured.version": "16.16.0",
-    "javascript.nodejs.core.library.typings.version": "16.18.60",
+    "javascript.nodejs.core.library.configured.version": "10.19.0",
+    "javascript.nodejs.core.library.typings.version": "10.17.60",
+    "last_opened_file_path": "/home/cw/UCL/CASA0017/casa0017-Assignment",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "ts.external.directory.path": "C:\\Users\\cw\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external"
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Users\\cw\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="404 auto direct added">
       <option name="closed" value="true" />
@@ -42,8 +62,19 @@
       <option name="project" value="LOCAL" />
       <updated>1699549188416</updated>
     </task>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5c96b3cf-d4ac-4554-8829-56e142460445" name="Changes" comment="404 auto direct added" />
+      <created>1699983171968</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699983171968</updated>
+      <workItem from="1699983172967" duration="331000" />
+    </task>
     <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="dependencies" />

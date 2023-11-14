@@ -1,21 +1,47 @@
-# casa0017-Assignment
-please use port 8898 to load our page：http://casa0017.cetools.org:8898
-
 # Carbon Intensity Monitoring Web Application
+## Usage Instructions
 
-# Usage Instructions
+1. Clone the repository:
 
-1. Clone the repository.
-2. Open the HTML file in a web browser.
-3. Explore the interactive map, navigation bar, and historical data charts in the offcanvas sidebar.
+   ```
+   git clone https://github.com/casa0017-group7/casa0017-Assignment.git
+   ```
 
-# Dependancies
+   
+
+2. Deploy the server in local:
+
+   ```
+   node server/bin/www.js
+   ```
+
+3. Open http://localhost:8898 in your browser
+
+   or access the link we have deployed on the server: http://casa0017.cetools.org:8898
+   
+## Directory structure
+
+```
+└─server 					Project main folder
+    ├─bin					Project startup file/entry
+    ├─node_modules			Project dependency
+    ├─public				Static resource directory
+    │  ├─apidoc					Apidoc directory
+    │  ├─images					Image directory
+    │  ├─javascripts			Javascript directory
+    │  ├─resources				Other resources
+    │  └─stylesheets			css files directory
+    ├─routes				Web routing configuration file
+    └─views					Html files directory
+```
+
+## Front-end Dependencies
 
 This section provides an analysis of the JavaScript and CSS used in the provided HTML page. The analysis is organized into two sections: JavaScript and CSS.
 
-## JavaScript
+### JavaScript
 
-### External Libraries and Scripts
+#### External Libraries and Scripts
 
 ```html
 <!--google charts-->
@@ -29,7 +55,7 @@ This section provides an analysis of the JavaScript and CSS used in the provided
 - **Google Charts Library**: The page includes the Google Charts library for rendering charts.
 - **Custom JavaScript Files**: Two custom JavaScript files, `maps.js` and `mapstyle.js`, are included for handling map functionality.
 
-### jQuery and jQuery Datetime Picker
+#### jQuery and jQuery Datetime Picker
 
 ```html
 <!--Jquery-->
@@ -43,7 +69,7 @@ This section provides an analysis of the JavaScript and CSS used in the provided
 - **jQuery Library**: The jQuery library is included for simplified DOM manipulation and event handling.
 - **jQuery Datetime Picker**: A jQuery-based datetime picker library is included for handling date and time inputs.
 
-### Bootstrap CSS & Icon CSS and JavaScript
+#### Bootstrap CSS & Icon CSS and JavaScript
 
 ```html
 <!--bootstrap.css-->
@@ -59,7 +85,7 @@ This section provides an analysis of the JavaScript and CSS used in the provided
 - **Bootstrap CSS**: The Bootstrap CSS file is included for styling the page.
 - **Bootstrap JavaScript**: The Bootstrap JavaScript bundle is included for interactive components such as collapsible navigation.
 
-### Google Maps API
+#### Google Maps API
 
 ```html
 <script>
@@ -74,7 +100,7 @@ This section provides an analysis of the JavaScript and CSS used in the provided
 
 - **Google Maps API Loading Script**: A script is included to dynamically load the Google Maps API with the provided API key.
 
-### Custom Chart Scripts
+#### Custom Chart Scripts
 
 ```html
 <!-- barchart -->
@@ -83,9 +109,9 @@ This section provides an analysis of the JavaScript and CSS used in the provided
 
 - **Custom Chart Script**: A custom JavaScript file (`barchart.js`) is included for handling specific chart functionality.
 
-## CSS
+### CSS
 
-### External Stylesheets
+#### External Stylesheets
 
 ```html
 <!--css-->
@@ -99,10 +125,10 @@ This section provides an analysis of the JavaScript and CSS used in the provided
 - **jQuery Datetime Picker CSS**: The CSS file for styling the jQuery datetime picker is included.
 
 
-## ------ insert here for other code -------
+### ------ insert here for other code -------
 
 
-## Additional Features
+### Additional Features
 
 - **Date and Region Selection:** Users can select specific dates and regions to view historical carbon intensity data.
 - **Energy Type Percentage Charts:** Interactive bar and line charts display energy type percentages for the selected region and date range.
@@ -114,4 +140,22 @@ This section provides an analysis of the JavaScript and CSS used in the provided
 Feel free to customize and extend this template for your specific application needs.
 
 For more information and updates, refer to the official documentation or contact the project contributors.
+
+## API
+
+You can find apidoc after deploy at http://localhost:8898/apidoc
+
+## Trouble Shooter
+
+<b>1. Error: Cannot find module '../secrets.js' </b>
+
+Files to store the database host, user name, and password are missing
+
+<b>2. Error: Cannot find module 'mysql' </b>
+
+install mysql module in /server directory
+
+```
+npm install mysql
+```
 

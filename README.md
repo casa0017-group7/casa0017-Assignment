@@ -2,6 +2,12 @@
 
 # Carbon Intensity Monitoring Web Application
 
+# Usage Instructions
+
+1. Clone the repository.
+2. Open the HTML file in a web browser.
+3. Explore the interactive map, navigation bar, and historical data charts in the offcanvas sidebar.
+
 # Dependancies
 
 This section provides an analysis of the JavaScript and CSS used in the provided HTML page. The analysis is organized into two sections: JavaScript and CSS.
@@ -102,11 +108,7 @@ The HTML page incorporates several external libraries and custom scripts to enab
 - **Date and Region Selection:** Users can select specific dates and regions to view historical carbon intensity data.
 - **Energy Type Percentage Charts:** Interactive bar and line charts display energy type percentages for the selected region and date range.
 
-## Usage Instructions
 
-1. Clone the repository.
-2. Open the HTML file in a web browser.
-3. Explore the interactive map, navigation bar, and historical data charts in the offcanvas sidebar.
 
 **Note:** Ensure an active internet connection to load external libraries and data.
 

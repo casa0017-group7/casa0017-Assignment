@@ -1,4 +1,5 @@
 # Carbon Intensity Monitoring Web Application
+CarbonMap website is developed for the CASA-0017 Web Architecture module. Its primary function is to visualize Carbon Intensity values across different UK regions using an interactive map. The website currently features four essential pages: the Cover page, the Map page, the About page, and the Resources page. Through the integration of Google Maps and the carbon intensity API, users can visualize Carbon Intensity values straightforward.
 ## Usage Instructions
 
 1. Clone the repository:

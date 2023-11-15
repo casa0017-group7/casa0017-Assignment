@@ -156,7 +156,7 @@ const host = 'your_server_host';
 const port = 3306;
 const user = 'your_username';
 const password = 'your_password';
-const database = 'your_database'
+const database = 'your_database';
 
 module.exports = {host, port, user, password, database}
 ```

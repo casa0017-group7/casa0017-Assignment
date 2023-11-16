@@ -126,7 +126,6 @@ This section provides an analysis of the JavaScript and CSS used in the provided
 - **jQuery Datetime Picker CSS**: The CSS file for styling the jQuery datetime picker is included.
 
 
-### ------ insert here for other code -------
 
 
 ### Additional Features
